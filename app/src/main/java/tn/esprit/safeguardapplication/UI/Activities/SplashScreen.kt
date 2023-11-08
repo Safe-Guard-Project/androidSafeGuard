@@ -9,7 +9,7 @@ import tn.esprit.safeguardapplication.R
 
 
 class SplashScreen : AppCompatActivity() {
-    private val delay : Long = 2000
+    private val delay : Long = 3000
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
