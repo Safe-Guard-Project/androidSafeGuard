@@ -1,3 +1,16 @@
 <resources>
     <string name="app_name">SafeGuardApplication</string>
+
+    <string name="EnterFullName">Enter your full name</string>
+        <string name="EnterPPass">Enter your prefered password</string>
+
+    <string name="EnterEmail">Enter your email adress</string>
+    <string name="EnterPass">Enter your  password</string>
+    <string name="Agreement">Agree to the companies <font color="#0047FF">terms and services</font></string>
+    <string name="SugLogin">Already got an account then</string>
+    <string name="login"><font color="#0047FF">Login .</font></string>
+  <string name="fgpass">i forget my passsword</string>
+    <string name="text_otp_validationE">Enter the code sent to you by Email</string>
+    <string name="text_otp_validationM">Enter the code sent to you by Mobile number</string>
+
 </resources>
