@@ -1,8 +1,8 @@
 package tn.esprit.safeguardapplication.UI.Activities
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import com.mapbox.android.gestures.MoveGestureDetector
@@ -16,6 +16,7 @@ import com.mapbox.maps.plugin.gestures.gestures
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorBearingChangedListener
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
 import com.mapbox.maps.plugin.locationcomponent.location
+import tn.esprit.safeguardapplication.MainActivity
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.databinding.ActivityMapBinding
 import tn.esprit.safeguardapplication.util.LocationPermissionHelper
@@ -54,7 +55,11 @@ class MapActivity : AppCompatActivity() {
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mapView = binding.mapview
-        mapView?.getMapboxMap()?.loadStyleUri(Style.MAPBOX_STREETS)
+        binding.returnButton.setOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+        mapView?.getMapboxMap()?.loadStyleUri(Style.TRAFFIC_DAY)
         mapView = MapView(this)
         setContentView(mapView)
         locationPermissionHelper = LocationPermissionHelper(WeakReference(this))
@@ -73,6 +78,24 @@ class MapActivity : AppCompatActivity() {
         ) {
             initLocationComponent()
             setupGesturesListener()
+
+            // Use the safe call operator to handle potential null values
+            val latitude = userLatitude
+            val longitude = userLongitude
+
+            if (latitude != null && longitude != null) {
+                mapView.getMapboxMap().setCamera(
+                    CameraOptions.Builder()
+                        .center(
+                            com.mapbox.geojson.Point.fromLngLat(
+                                longitude,
+                                latitude
+                            )
+                        )
+                        .zoom(14.0)
+                        .build()
+                )
+            }
         }
     }
 
@@ -125,7 +148,7 @@ class MapActivity : AppCompatActivity() {
 
 
     private fun onCameraTrackingDismissed() {
-        Toast.makeText(this, "onCameraTrackingDismissed", Toast.LENGTH_SHORT).show()
+
         mapView.location
             .removeOnIndicatorPositionChangedListener(onIndicatorPositionChangedListener)
         mapView.location

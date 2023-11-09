@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
+import tn.esprit.safeguardapplication.MainActivity
 import tn.esprit.safeguardapplication.R
 
 
@@ -16,7 +17,7 @@ class SplashScreen : AppCompatActivity() {
 
 
         Handler().postDelayed({
-            val   intent = Intent(this ,MapActivity::class.java)
+            val   intent = Intent(this , MainActivity::class.java)
             startActivity(intent)
             finish()
         },delay)
