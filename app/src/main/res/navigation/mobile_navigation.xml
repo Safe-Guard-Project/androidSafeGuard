@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_introduction">
+
+    <fragment
+        android:id="@+id/nav_introduction"
+        android:name="tn.esprit.safeguardapplication.UI.Fragments.introFragment"
+        android:label="@string/menu_Introduction"
+        tools:layout="@layout/fragment_intro" />
+
+    <fragment
+        android:id="@+id/nav_cause"
+        android:name="tn.esprit.safeguardapplication.UI.Fragments.causeFragment"
+        android:label="@string/menu_Cause"
+        tools:layout="@layout/fragment_cause" />
+
+    <fragment
+        android:id="@+id/nav_consequence"
+        android:name="tn.esprit.safeguardapplication.UI.Fragments.consequenceFragment"
+        android:label="@string/menu_Consequence"
+        tools:layout="@layout/fragment_consequence" />
+    <fragment
+        android:id="@+id/nav_signe"
+        android:name="tn.esprit.safeguardapplication.UI.Fragments.signeFragment"
+        android:label="@string/menu_Signes"
+        tools:layout="@layout/fragment_signe" />
+    <fragment
+        android:id="@+id/nav_agir"
+        android:name="tn.esprit.safeguardapplication.UI.Fragments.agirFragment"
+        android:label="@string/menu_Agir"
+        tools:layout="@layout/fragment_agir" />
+    <fragment
+        android:id="@+id/nav_quiz"
+        android:name="tn.esprit.safeguardapplication.UI.Fragments.quizFragment"
+        android:label="@string/menu_Signes"
+        tools:layout="@layout/fragment_quiz" />
+</navigation>
