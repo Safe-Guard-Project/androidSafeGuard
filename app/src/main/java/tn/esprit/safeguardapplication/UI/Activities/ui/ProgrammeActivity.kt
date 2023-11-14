@@ -23,7 +23,7 @@ class ProgrammeActivity : AppCompatActivity() {
     }
     private fun getprogrammeList(context: Context) : MutableList<Programme>{
         return  mutableListOf(
-            Programme(R.drawable.tsunamii,"Tsunami","decourvrire le phenomene de tsunamiiiiiiiiiii"),
+            Programme(R.drawable.tsunamii,"tsunami","decourvrire le phenomene de tsunamiiiiiiiiiii"),
             Programme(R.drawable.tremblement ,"Tremblement","decourvrire le phenomene de tremblement de terre")
         )
 
