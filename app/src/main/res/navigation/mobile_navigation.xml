@@ -35,6 +35,6 @@
     <fragment
         android:id="@+id/nav_quiz"
         android:name="tn.esprit.safeguardapplication.UI.Fragments.quizFragment"
-        android:label="@string/menu_Signes"
+        android:label="@string/menu_Quiz"
         tools:layout="@layout/fragment_quiz" />
 </navigation>

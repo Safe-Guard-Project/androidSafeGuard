@@ -12,10 +12,10 @@
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="129dp"
-        android:layout_height="83dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="96dp"
+        android:layout_height="72dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="40dp"
         android:scaleType="centerCrop"
 
         app:srcCompat="@drawable/ec_removebg_preview" />

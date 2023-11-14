@@ -2,8 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
-<item android:title="Contenue de cours">
-    <menu>
+
+
         <group android:checkableBehavior="single">
             <item
                 android:id="@+id/nav_introduction"
@@ -25,20 +25,13 @@
                 android:id="@+id/nav_agir"
 
                 android:title="@string/menu_Agir" />
+            <item
+                android:id="@+id/nav_quiz"
+
+                android:title="@string/menu_Quiz" />
         </group>
-    </menu>
-</item>
-    <item android:title="Teste de niveau">
-        <menu>
-            <group android:checkableBehavior="single">
 
-                <item
-                    android:id="@+id/nav_quiz"
 
-                    android:title="@string/menu_Quiz" />
-            </group>
-        </menu>
-    </item>
 
 
 
