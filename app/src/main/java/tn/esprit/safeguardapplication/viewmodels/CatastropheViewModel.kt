@@ -1,13 +1,22 @@
-package tn.esprit.safeguardapplication.viewmodels
+// CatastropheViewModel.kt
+package tn.esprit.t1.viewmodel
 
-import androidx.lifecycle.LiveData
+import android.util.Log
 import androidx.lifecycle.ViewModel
-import tn.esprit.safeguardapplication.models.Catastrophe
-import tn.esprit.safeguardapplication.repository.CatastropheRepository
+import androidx.lifecycle.liveData
+import kotlinx.coroutines.Dispatchers
+import tn.esprit.safeguardapplication.TAG
+import tn.esprit.safeguardapplication.repository.RetrofitInstance
 
-class CatastropheViewModel(private val repository: CatastropheRepository) : ViewModel() {
+class CatastropheViewModel : ViewModel() {
 
-    // LiveData to observe the list of catastrophes in your UI
-    private val _catastrophes: LiveData<List<Catastrophe>> = repository.getCatastrophes()
-    val catastrophes: LiveData<List<Catastrophe>> get() = _catastrophes
+    fun getCatastrophes() = liveData(Dispatchers.IO) {
+        try {
+            val response = RetrofitInstance.api.getCatastophes()
+            emit(response.body())
+        } catch (e: Exception) {
+            Log.e(TAG, "Exception: ${e.message}")
+            emit(null)
+        }
+    }
 }

@@ -1,6 +1,5 @@
 package tn.esprit.safeguardapplication
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -20,9 +19,9 @@ import java.security.KeyManagementException
 import java.security.NoSuchAlgorithmException
 import javax.net.ssl.SSLContext
 
-const val TAGI = "Main Activity"
+const val TAG = "Catastrophe Activity"
 
-class MainActivity : ComponentActivity() {
+class CatastropheActivity : ComponentActivity() {
 
     private lateinit var catastropheAdapter: CatastropheAdapter
     private lateinit var binding: ActivityCatastropheBinding
@@ -38,27 +37,19 @@ class MainActivity : ComponentActivity() {
 
         setupRecyclerView()
         observeViewModel()
-
-        // Launch CatastropheActivity
-        launchCatastropheActivity()
-    }
-
-    private fun launchCatastropheActivity() {
-        val intent = Intent(this, CatastropheActivity::class.java)
-        startActivity(intent)
     }
 
     private fun observeViewModel() {
         lifecycleScope.launch {
             binding.progressBar.isVisible = true
 
-            viewModel.getCatastrophes().observe(this@MainActivity, { catastrophes ->
+            viewModel.getCatastrophes().observe(this@CatastropheActivity, { catastrophes ->
                 binding.progressBar.isVisible = false
 
                 if (catastrophes != null) {
                     catastropheAdapter.catastrophes = catastrophes
                 } else {
-                    Log.e(TAGI, "Error retrieving catastrophes")
+                    Log.e(TAG, "Error retrieving catastrophes")
                 }
             })
         }
@@ -67,6 +58,6 @@ class MainActivity : ComponentActivity() {
     private fun setupRecyclerView() = binding.rvCatastrophe.apply {
         catastropheAdapter = CatastropheAdapter()
         adapter = catastropheAdapter
-        layoutManager = LinearLayoutManager(this@MainActivity)
+        layoutManager = LinearLayoutManager(this@CatastropheActivity)
     }
 }
