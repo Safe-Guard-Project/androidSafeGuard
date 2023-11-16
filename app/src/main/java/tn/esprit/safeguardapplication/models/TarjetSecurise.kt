@@ -1,7 +1,7 @@
 package tn.esprit.safeguardapplication.models
 
 data class TarjetSecurise(
-    val id : Int,
+    val id : String,
     val etat: Boolean,
     val iduser: String,
     val idCatastrophe: String

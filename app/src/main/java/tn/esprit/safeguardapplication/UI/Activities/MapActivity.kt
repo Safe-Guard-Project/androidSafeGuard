@@ -4,6 +4,7 @@ package tn.esprit.safeguardapplication.UI.Activities
 
 
 import android.Manifest
+import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Bundle
@@ -16,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.ViewModelProvider
 import com.mapbox.android.gestures.MoveGestureDetector
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
@@ -44,6 +46,7 @@ import com.mapbox.search.ui.view.SearchResultsView
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.databinding.ActivityMapBinding
 import tn.esprit.safeguardapplication.util.LocationPermissionHelper
+import tn.esprit.safeguardapplication.viewmodels.ZoneDeDangerViewModel
 import java.lang.ref.WeakReference
 
 
@@ -75,7 +78,7 @@ class MapActivity : AppCompatActivity() {
     private lateinit var mapView: MapView
     private lateinit var binding: ActivityMapBinding
 
-
+    private lateinit var zoneDeDangerViewModel: ZoneDeDangerViewModel
 
     private lateinit var searchEngine: SearchEngine
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,6 +86,8 @@ class MapActivity : AppCompatActivity() {
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mapView = binding.mapView
+
+
 
 
         mapView?.getMapboxMap()?.loadStyleUri(Style.TRAFFIC_DAY)
@@ -113,8 +118,6 @@ class MapActivity : AppCompatActivity() {
 
         searchEngineUiAdapter.addSearchListener(object : SearchEngineUiAdapter.SearchListener {
 
-
-
             private fun showToast(message: String) {
                 Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
             }
@@ -140,11 +143,20 @@ class MapActivity : AppCompatActivity() {
             }
 
             override fun onSearchResultSelected(searchResult: SearchResult, responseInfo: ResponseInfo) {
-                showToast("SearchResult clicked: ${searchResult.name}")
+                // Assuming you have a reference to your MapboxMap object as 'mapboxMap'
+                val newCameraPosition = CameraOptions.Builder()
+                    .center(searchResult.coordinate)
+                    .zoom(14.0) // or any other zoom level you prefer
+                    .build()
+                mapView.getMapboxMap().setCamera(newCameraPosition)
             }
 
             override fun onOfflineSearchResultSelected(searchResult: OfflineSearchResult, responseInfo: OfflineResponseInfo) {
-                showToast("OfflineSearchResult clicked: ${searchResult.name}")
+                val newCameraPosition = CameraOptions.Builder()
+                    .center(searchResult.coordinate)
+                    .zoom(14.0) // or any other zoom level you prefer
+                    .build()
+                mapView.getMapboxMap().setCamera(newCameraPosition)
             }
 
             override fun onError(e: Exception) {
@@ -152,7 +164,11 @@ class MapActivity : AppCompatActivity() {
             }
 
             override fun onHistoryItemClick(historyRecord: HistoryRecord) {
-                showToast("HistoryRecord clicked: ${historyRecord.name}")
+                val newCameraPosition = CameraOptions.Builder()
+                    .center(historyRecord.coordinate)
+                    .zoom(14.0) // or any other zoom level you prefer
+                    .build()
+                mapView.getMapboxMap().setCamera(newCameraPosition)
             }
 
             override fun onPopulateQueryClick(suggestion: SearchSuggestion, responseInfo: ResponseInfo) {
@@ -194,6 +210,18 @@ class MapActivity : AppCompatActivity() {
             )
         }
 
+
+        zoneDeDangerViewModel = ViewModelProvider(this).get(ZoneDeDangerViewModel::class.java)
+
+        zoneDeDangerViewModel.getZoneDeDanger().observe(this, { zoneDeDanger ->
+            if (zoneDeDanger != null) {
+                Log.d(TAG, "ZoneDeDanger: $zoneDeDanger")
+            } else {
+                Log.e(TAG, "Error getting ZoneDeDanger")
+            }
+
+        })
+
     }
 
 
@@ -207,7 +235,9 @@ class MapActivity : AppCompatActivity() {
         }
     }
     private fun onMapReady() {
+
         mapView.getMapboxMap().loadStyleUri(Style.MAPBOX_STREETS) {
+
             initLocationComponent()
             setupGesturesListener()
 
@@ -223,6 +253,7 @@ class MapActivity : AppCompatActivity() {
                 )
             }
         }
+
     }
 
     private fun setupGesturesListener() {
@@ -263,7 +294,7 @@ class MapActivity : AppCompatActivity() {
         locationComponentPlugin.addOnIndicatorPositionChangedListener { point ->
             userLatitude = point.latitude()
             userLongitude = point.longitude()
-            Log.d("User Location", "Latitude: $userLatitude, Longitude: $userLongitude")
+            //Log.d("User Location", "Latitude: $userLatitude, Longitude: $userLongitude")
         }
 
         locationComponentPlugin.addOnIndicatorBearingChangedListener(onIndicatorBearingChangedListener)
@@ -309,4 +340,5 @@ class MapActivity : AppCompatActivity() {
             .removeOnIndicatorPositionChangedListener(onIndicatorPositionChangedListener)
         mapView.gestures.removeOnMoveListener(onMoveListener)
     }
+
 }

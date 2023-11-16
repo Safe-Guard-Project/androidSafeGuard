@@ -7,7 +7,6 @@ import androidx.appcompat.app.AppCompatActivity
 import tn.esprit.safeguardapplication.MainActivity
 import tn.esprit.safeguardapplication.R
 
-
 class SplashScreen : AppCompatActivity() {
     private val delay : Long = 3000
     override fun onCreate(savedInstanceState: Bundle?) {
