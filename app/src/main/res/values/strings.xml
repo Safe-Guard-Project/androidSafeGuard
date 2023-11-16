@@ -2,15 +2,35 @@
     <string name="app_name">SafeGuardApplication</string>
 
     <string name="EnterFullName">Enter your full name</string>
-        <string name="EnterPPass">Enter your prefered password</string>
+    <string name="EnterPPass">Enter your prefered password</string>
 
     <string name="EnterEmail">Enter your email adress</string>
     <string name="EnterPass">Enter your  password</string>
     <string name="Agreement">Agree to the companies <font color="#0047FF">terms and services</font></string>
     <string name="SugLogin">Already got an account then</string>
     <string name="login"><font color="#0047FF">Login .</font></string>
-  <string name="fgpass">i forget my passsword</string>
+    <string name="fgpass">Did your forget your passsword?</string>
     <string name="text_otp_validationE">Enter the code sent to you by Email</string>
     <string name="text_otp_validationM">Enter the code sent to you by Mobile number</string>
-
+    <string name="nom">nomPersonne</string>
+    <string name="numeroTel">53115231</string>
+    <string name="name_here">Name Here</string>
+    <string name="email_here">Email Here</string>
+    <string name="numeroTel_here">NumeroTel Here</string>
+    <string name="txt_forgot_password_desc">Please enter your registered email to reset your password</string>
+    <string name="txt_forgot_password_desc2">Please enter your registered phone number to reset your password</string>
+    <string name="EnterTel">Enter your phone number </string>
+    <string name="btn_submit">Submit</string>
+    <string name="btn_sendSMS">Send SMS</string>
+    <string name="btn_verify">Verify</string>
+    <string name="txt_or">OR</string>
+    <string name="input_email_or_phone">Email/Phone</string>
+    <string name="sign_in">Sign in</string>
+    <string name="profile">profile</string>
+    <string name="beauty_desc">beauty description</string>
+    <string name="info">Info</string>
+    <string name="logout">Logout</string>
+    <string name="txt_forgot_password">Forgot Password</string>
+    <string name="change_it">change it now</string>
+    <string name="signup">SignUp</string>
 </resources>

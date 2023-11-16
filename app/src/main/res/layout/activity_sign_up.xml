@@ -39,68 +39,81 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Sign up" />
+        android:text="Sign up" />
 
-    <TextView
-        android:id="@+id/textView11"
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/fullnamesu"
         android:layout_width="336dp"
         android:layout_height="40dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="20dp"
         android:background="@drawable/rounded_corners"
         android:hint="@string/EnterFullName"
-        app:layout_constraintEnd_toStartOf="@+id/imageView10"
-        app:layout_constraintHorizontal_bias="0.005"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
-    <TextView
-        android:id="@+id/textView12"
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/emailsu"
         android:layout_width="334dp"
         android:layout_height="36dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="40dp"
         android:background="@drawable/rounded_corners"
         android:hint="@string/EnterEmail"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.675"
+        app:layout_constraintHorizontal_bias="0.714"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+        app:layout_constraintTop_toBottomOf="@+id/fullnamesu">
 
-    <TextView
-        android:id="@+id/textView13"
+    </com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/passwordsu"
         android:layout_width="333dp"
         android:layout_height="38dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:background="@drawable/rounded_corners"
         android:hint="@string/EnterPPass"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
+        app:layout_constraintHorizontal_bias="0.705"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView12" />
+        app:layout_constraintTop_toBottomOf="@+id/emailsu"></com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/numeroTel"
+        android:layout_width="333dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/rounded_corners"
+        android:hint="@string/EnterTel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordsu"></com.google.android.material.textfield.TextInputEditText>
 
     <CheckBox
         android:id="@+id/checkBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="48dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13" />
+        app:layout_constraintTop_toTopOf="@+id/numeroTel" />
 
     <TextView
         android:id="@+id/textView14"
         android:layout_width="277dp"
         android:layout_height="47dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="52dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="64dp"
         android:fontFamily="@font/poppins_thin"
+        android:text="@string/Agreement"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView13"
-        tools:text="@string/Agreement" />
+        app:layout_constraintTop_toBottomOf="@+id/passwordsu" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/signupB"
         android:layout_width="173dp"
         android:layout_height="51dp"
         android:layout_marginStart="76dp"
@@ -109,7 +122,8 @@
         android:fontFamily="@font/poppins_thin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView14"
-        tools:text="Sign up ➞" />
+        android:text="Sign up ➞" />
+
 
     <TextView
         android:id="@+id/textView15"
@@ -118,20 +132,23 @@
         android:layout_marginStart="76dp"
         android:layout_marginTop="36dp"
         android:fontFamily="@font/poppins_thin"
+        android:text="@string/SugLogin"
+        app:layout_constraintEnd_toStartOf="@+id/textView16"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button3"
-        tools:text="@string/SugLogin" />
+        app:layout_constraintTop_toBottomOf="@+id/signupB" />
 
     <TextView
-        android:id="@+id/textView16"
-        android:layout_width="46dp"
-        android:layout_height="27dp"
-        android:layout_marginEnd="76dp"
+        android:id="@+id/switchSignupLoginButton"
+        android:layout_width="51dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="60dp"
         android:fontFamily="@font/poppins_thin"
+        android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="@+id/textView15"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textView15"
-        tools:text="@string/login" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <ImageView
         android:id="@+id/imageView12"

@@ -41,20 +41,21 @@
 
     <LinearLayout
         android:id="@+id/linearLayout2"
-        android:layout_width="349dp"
-        android:layout_height="133dp"
+        android:layout_width="398dp"
+        android:layout_height="151dp"
         android:layout_marginTop="260dp"
         android:background="#FFFFFF"
         android:orientation="horizontal"
         android:weightSum="4"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.461"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tiCode1Layout"
             style="?attr/textInputFilledStyle"
-            android:layout_width="0dp"
+            android:layout_width="17dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_weight="1">
@@ -75,7 +76,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tiCode2Layout"
             style="?attr/textInputFilledStyle"
-            android:layout_width="0dp"
+            android:layout_width="16dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_weight="1">
@@ -96,7 +97,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tiCode3Layout"
             style="?attr/textInputFilledStyle"
-            android:layout_width="0dp"
+            android:layout_width="28dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_weight="1">
@@ -104,7 +105,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/tiCode3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:background="@color/white"
                 android:gravity="center"
                 android:inputType="number"
@@ -117,7 +118,7 @@
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/tiCode4Layout"
             style="?attr/textInputFilledStyle"
-            android:layout_width="0dp"
+            android:layout_width="29dp"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
             android:layout_weight="1">
@@ -138,12 +139,14 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnVerify"
         android:layout_width="174dp"
         android:layout_height="55dp"
+        android:layout_marginTop="8dp"
         android:backgroundTint="#0047FF"
         android:fontFamily="@font/poppins_thin"
         android:text="Verify"
-        tools:layout_editor_absoluteX="113dp"
-        tools:layout_editor_absoluteY="434dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
 </androidx.constraintlayout.widget.ConstraintLayout>
