@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import tn.esprit.safeguardapplication.R
+import tn.esprit.safeguardapplication.UI.adapters.InformationAdapter
 import tn.esprit.safeguardapplication.databinding.FragmentInformationBinding
 import tn.esprit.safeguardapplication.models.Information
 
@@ -76,7 +77,5 @@ class InformationFragment : Fragment() {
         )
     }
 
-    binding.btnAddInfo.setOnClickListener {
-        findNavController().navigate(R.id.action_informationFragment_to_addInfoFragment)
-    }
+
 }
