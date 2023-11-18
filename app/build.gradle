@@ -7,6 +7,10 @@ android {
     namespace 'tn.esprit.safeguardapplication'
     compileSdk 34
 
+    buildFeatures {
+        viewBinding true
+    }
+
     defaultConfig {
         applicationId "tn.esprit.safeguardapplication"
         minSdk 24
