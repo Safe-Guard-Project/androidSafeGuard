@@ -42,8 +42,12 @@ class quizFragment : Fragment() {
     ): View? {
         binding = FragmentQuizBinding.inflate(inflater, container, false)
         binding.rvQuizid.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-
         return binding.root
+
     }
+
+
+
+
 
 }

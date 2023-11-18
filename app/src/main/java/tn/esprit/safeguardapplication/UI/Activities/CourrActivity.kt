@@ -11,13 +11,16 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.RecyclerView
 import tn.esprit.safeguardapplication.R
+import tn.esprit.safeguardapplication.UI.adapters.ProgrammeAdapter
 import tn.esprit.safeguardapplication.databinding.ActivityCourrBinding
 
 class CourrActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityCourrBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
