@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Fragments.AddInfoFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/addBlog"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@color/background"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/NewBlog"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:text="   Blog"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/typeCatastrophe"
+                    style="@style/AppTextStyle"
+                    android:layout_width="136dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Type of catastroph: " />
+
+                <Spinner
+                    android:id="@+id/spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Country"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="Country : " />
+
+                <EditText
+                    android:id="@+id/editCountry"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/gris"
+                    android:ems="10"
+                    android:hint="   country"
+                    android:inputType="text"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="false" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/region"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Region:" />
+
+                <EditText
+                    android:id="@+id/editRegion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/gris"
+                    android:ems="10"
+                    android:hint="    region"
+                    android:inputType="text" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/datePrevention"
+                    style="@style/AppTextStyle"
+                    android:layout_width="368dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Select Date: " />
+
+                <CalendarView
+                    android:id="@+id/calendarView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/statement"
+                    style="@style/AppTextStyle"
+                    android:layout_width="232dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Statement:" />
+
+                <RadioGroup
+                    android:layout_width="221dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <RadioButton
+                        android:id="@+id/radioButtonOngoing"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ongoing" />
+
+                    <RadioButton
+                        android:id="@+id/radioButtonNotYet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Not Yet" />
+                </RadioGroup>
+            </LinearLayout>
+
+
+            <EditText
+
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="155dp"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/rounded_edittext"
+                android:gravity="center"
+                android:hint="Enter Description" />
+
+            <ImageButton
+                android:id="@+id/btnAddImage"
+                android:layout_width="120dp"
+                android:layout_height="69dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_addimage" />
+
+            <Button
+                android:id="@+id/buttonSubmit"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/rounded_button"
+                android:text="Send"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
