@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">SafeGuardApplication</string>
-    <string name="mapbox_access_token">sk.eyJ1Ijoib3Vzc2FtYWJvdXJpZ2EiLCJhIjoiY2xvcGtjajd3MGJndTJpbHd5YXJoamw0eCJ9.oVJMyzZBdGtAlMX548Sfvw</string>
+    <string name="mapbox_access_token">sk.eyJ1Ijoib3Vzc2FtYWJvdXJpZ2EiLCJhIjoiY2xwNWl1dXk5MWozZzJycXl6enR5MzBmeSJ9.KZvaArDJOGDDkVG4Sx4egA</string>
 </resources>

@@ -3,37 +3,47 @@ package tn.esprit.safeguardapplication.UI.Activities
 
 
 
-import android.Manifest
 import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
+import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
 import com.mapbox.android.gestures.MoveGestureDetector
+import com.mapbox.geojson.Feature
+import com.mapbox.geojson.FeatureCollection
 import com.mapbox.geojson.Point
+import com.mapbox.geojson.Polygon
+import com.mapbox.mapboxsdk.plugins.annotation.CircleManager
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
+import com.mapbox.maps.MapboxMap
 import com.mapbox.maps.Style
 import com.mapbox.maps.extension.style.expressions.dsl.generated.interpolate
+import com.mapbox.maps.extension.style.layers.addLayer
+import com.mapbox.maps.extension.style.layers.generated.fillLayer
+import com.mapbox.maps.extension.style.sources.addSource
+import com.mapbox.maps.extension.style.sources.generated.geoJsonSource
 import com.mapbox.maps.plugin.LocationPuck2D
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
 import com.mapbox.maps.plugin.gestures.OnMoveListener
+import com.mapbox.maps.plugin.gestures.addOnMapClickListener
 import com.mapbox.maps.plugin.gestures.gestures
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorBearingChangedListener
 import com.mapbox.maps.plugin.locationcomponent.OnIndicatorPositionChangedListener
@@ -57,7 +67,10 @@ import tn.esprit.safeguardapplication.databinding.ActivityMapBinding
 import tn.esprit.safeguardapplication.util.LocationPermissionHelper
 import tn.esprit.safeguardapplication.viewmodels.ZoneDeDangerViewModel
 import java.lang.ref.WeakReference
-class MapActivity : AppCompatActivity() {
+import kotlin.math.PI
+import kotlin.math.cos
+import kotlin.math.sin
+class MapActivity() : AppCompatActivity() {
 
     private lateinit var locationPermissionHelper: LocationPermissionHelper
 
@@ -88,6 +101,7 @@ class MapActivity : AppCompatActivity() {
     private lateinit var zoneDeDangerViewModel: ZoneDeDangerViewModel
 
     private lateinit var searchEngine: SearchEngine
+    private lateinit var circleManager: CircleManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapBinding.inflate(layoutInflater)
@@ -98,16 +112,10 @@ class MapActivity : AppCompatActivity() {
 
 
         mapView?.getMapboxMap()?.loadStyleUri(
-            Style.MAPBOX_STREETS,
-            object : Style.OnStyleLoaded {
-                override fun onStyleLoaded(style: Style) {
-                    addAnnotationToMap()
-                }
-            }
-        )
+            Style.MAPBOX_STREETS)
         locationPermissionHelper = LocationPermissionHelper(WeakReference(this))
         locationPermissionHelper.checkPermissions {
-            onMapReady()
+            onMapReady(mapboxMap = mapView.getMapboxMap())
         }
         searchEngine = SearchEngine.createSearchEngineWithBuiltInDataProviders(
             SearchEngineSettings(getString(R.string.mapbox_access_token))
@@ -215,26 +223,30 @@ class MapActivity : AppCompatActivity() {
             }
         })
 
-        // Check and request location permissions if needed
-        if (!isPermissionGranted(Manifest.permission.ACCESS_FINE_LOCATION)) {
-            ActivityCompat.requestPermissions(
-                this,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION),
-                SearchActivity.PERMISSIONS_REQUEST_LOCATION
-            )
+
+        // Set up map tap listener to hide the SearchResultsView
+        mapView.getMapboxMap().addOnMapClickListener { point ->
+            toggleSearchBarVisibility(false)
+            false // return false to indicate the click event is not consumed
         }
 
+        // Set up edit text focus listener to toggle the visibility of SearchResultsView
+        queryEditText.setOnFocusChangeListener { _, hasFocus ->
+            toggleSearchBarVisibility(hasFocus)
+        }
 
         zoneDeDangerViewModel = ViewModelProvider(this).get(ZoneDeDangerViewModel::class.java)
 
         zoneDeDangerViewModel.getZoneDeDanger().observe(this, { zoneDeDanger ->
             if (zoneDeDanger != null) {
-                Log.d(TAG, "ZoneDeDanger: $zoneDeDanger")
+                Log.d(TAG, " aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  ZoneDeDanger: $zoneDeDanger")
             } else {
                 Log.e(TAG, "Error getting ZoneDeDanger")
             }
 
         })
+
+
 
     }
 
@@ -289,10 +301,44 @@ class MapActivity : AppCompatActivity() {
             ) == PackageManager.PERMISSION_GRANTED
         }
     }
-    private fun onMapReady() {
+
+    private fun onMapReady(mapboxMap: MapboxMap) {
         mapView?.getMapboxMap()?.loadStyleUri(
-            Style.MAPBOX_STREETS) {
-            // Additional setup after the style is loaded
+            Style.MAPBOX_STREETS
+        ) {
+            // Define the center of the circle
+            val circleCenter = Point.fromLngLat(33.7931605, 9.5607653)
+            val radiusInKilometerss = 100.0
+
+            val circlePoints = ArrayList<Point>()
+            val steps = 64
+            val distanceX = radiusInKilometerss / (111.32 * cos(Math.toRadians(circleCenter.latitude())))
+            val distanceY = radiusInKilometerss / 110.574
+
+            for (i in 0 until steps) {
+                val theta = 2.0 * PI * i / steps
+                val x = distanceX * cos(theta)
+                val y = distanceY * sin(theta)
+                circlePoints.add(Point.fromLngLat(circleCenter.longitude() + x, circleCenter.latitude() + y))
+            }
+
+            val polygon = Polygon.fromLngLats(listOf(circlePoints))
+            val featureCollection = FeatureCollection.fromFeature(Feature.fromGeometry(polygon))
+
+            val source = geoJsonSource("circle-source") {
+                data(featureCollection.toJson()) // Convert FeatureCollection to JSON string
+            }
+            it.addSource(source)
+
+            val circleLayer = fillLayer("circle-layer", "circle-source") {
+                fillColor("#ff0000") // Set the color of the circle
+                fillOpacity(0.5) // Set opacity as a Double value
+            }
+
+            it.addLayer(circleLayer)
+        
+
+
             addAnnotationToMap()
             initLocationComponent()
             setupGesturesListener()
@@ -303,14 +349,32 @@ class MapActivity : AppCompatActivity() {
             if (latitude != null && longitude != null) {
                 mapView.getMapboxMap().setCamera(
                     CameraOptions.Builder()
-                        .center(com.mapbox.geojson.Point.fromLngLat(longitude, latitude))
-                        .zoom(12.0)
+                        .center(Point.fromLngLat(longitude, latitude))
+                        .zoom(1.0)
                         .build()
                 )
             }
         }
     }
 
+    private fun toggleSearchBarVisibility(visible: Boolean) {
+        val visibility = if (visible) View.VISIBLE else View.GONE
+        findViewById<SearchResultsView>(R.id.search_results_view).visibility = visibility
+    }
+
+
+
+    // Function to create a bitmap with a circle
+    fun createCircleBitmap(radius: Int, color: Int): Bitmap {
+        val bitmap = Bitmap.createBitmap(radius * 2, radius * 2, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        val paint = Paint().apply {
+            this.color = color
+            isAntiAlias = true
+        }
+        canvas.drawCircle(radius.toFloat(), radius.toFloat(), radius.toFloat(), paint)
+        return bitmap
+    }
 
     private fun setupGesturesListener() {
         mapView.gestures.addOnMoveListener(onMoveListener)
@@ -398,3 +462,4 @@ class MapActivity : AppCompatActivity() {
     }
 
 }
+

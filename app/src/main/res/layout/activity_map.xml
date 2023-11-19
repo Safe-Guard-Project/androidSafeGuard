@@ -9,27 +9,56 @@
         android:id="@+id/mapView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        mapbox:mapbox_cameraTargetLat="40.7128"
-        mapbox:mapbox_cameraTargetLng="-74.0060"
-        mapbox:mapbox_cameraZoom="9.0"
+        mapbox:mapbox_cameraTargetLat="33.7931605"
+        mapbox:mapbox_cameraTargetLng="9.5607653"
+        mapbox:mapbox_cameraZoom="1.0"
         />
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        android:layout_alignParentTop="true"
+        android:background="@android:color/transparent">
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="16dp"
+        android:elevation="4dp"
+        android:background="@drawable/rounded_edittext_bg">
+
+        <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/query_edit_text"
             android:layout_width="match_parent"
             android:layout_height="56dp"
             android:hint="Where to?"
-            android:paddingHorizontal="16dp" />
+            android:drawableStart="@drawable/baseline_search_24"
+            android:drawablePadding="16dp"
+            android:paddingStart="12dp"
+            android:paddingEnd="12dp"
+            android:background="@null"
+            android:elevation="4dp" />
 
-        <com.mapbox.search.ui.view.SearchResultsView
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.mapbox.search.ui.view.SearchResultsView
             android:id="@+id/search_results_view"
             android:layout_width="match_parent"
-            android:layout_height="89dp"
-            android:layout_below="@id/query_edit_text"
-            android:paddingVertical="16dp" />
-    </RelativeLayout>
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:background="@drawable/rounded_edittext_bg"
+            android:layout_marginTop="25dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="60dp"
+            android:elevation="4dp" />
+
+    </LinearLayout>
 </RelativeLayout>
