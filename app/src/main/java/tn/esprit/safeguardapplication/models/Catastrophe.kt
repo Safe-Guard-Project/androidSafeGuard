@@ -1,7 +1,9 @@
 package tn.esprit.safeguardapplication.models
 
+import androidx.room.Entity
 import java.util.Date
 
+@Entity
 data class Catastrophe(
     val _id: String,
     val titre: String,
