@@ -8,6 +8,8 @@ data class Cours (
     val Type : type ,
     val image: String ,
     val description: String ,
+    val idProgramme: String
+
     )
 {
     enum class type {

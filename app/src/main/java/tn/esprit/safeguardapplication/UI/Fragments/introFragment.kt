@@ -5,6 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import tn.esprit.safeguardapplication.Api.RetrofitImpl
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.databinding.ActivityProgrammeBinding
 import tn.esprit.safeguardapplication.databinding.FragmentIntroBinding
@@ -25,6 +30,7 @@ class introFragment : Fragment() {
     private var param2: String? = null
     private var isFavFilled = false
     private lateinit var binding: FragmentIntroBinding
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,17 +66,23 @@ class introFragment : Fragment() {
             // Inversez l'état actuel du cœur
             isFavFilled = !isFavFilled
         }
-    }
 
-    companion object {
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val introductionList = RetrofitImpl.api.getIntro()
 
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            introFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                if (introductionList != null) {
+                    withContext(Dispatchers.Main) {binding.textView5.text = introductionList[0].description
+                    }
+                } else {
+                    // Gérer le cas où la liste est null
                 }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                // Gérer les erreurs lors de l'appel à l'API
             }
+        }
+
+
     }
 }

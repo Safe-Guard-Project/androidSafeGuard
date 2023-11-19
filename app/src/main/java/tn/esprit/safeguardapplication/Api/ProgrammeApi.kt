@@ -25,6 +25,8 @@ interface ProgrammeApi {
     suspend fun getSignes(): List<Cours>
     @GET("cours/Agir")
     suspend fun getAgir(): List<Cours>
+    @GET("cours/Introduction")
+    suspend fun getIntro(): List<Cours>
 
 
 }

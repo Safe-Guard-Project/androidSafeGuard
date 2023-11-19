@@ -9,11 +9,16 @@ import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
+import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.UI.Activities.CourrActivity
 import tn.esprit.safeguardapplication.databinding.RecyclerprogBinding
 import tn.esprit.safeguardapplication.models.Programme
+import javax.sql.DataSource
+import android.graphics.drawable.Drawable
 
 class ProgrammeAdapter : RecyclerView.Adapter<ProgrammeAdapter.ProgrammeViewHolder> (){
 

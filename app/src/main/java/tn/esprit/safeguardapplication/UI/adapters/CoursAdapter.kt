@@ -4,9 +4,11 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.models.Cours
@@ -26,7 +28,7 @@ class CoursAdapter(private var contentList: List<Cours>) : RecyclerView.Adapter<
         return when (viewType) {
             VIEW_TYPE_CAUSE -> CauseViewHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.recyclercause, parent, false)
-               
+
             )
             VIEW_TYPE_CONSEQUENCE -> ConsequenceViewHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.recyclerconsequence, parent, false)
@@ -37,6 +39,7 @@ class CoursAdapter(private var contentList: List<Cours>) : RecyclerView.Adapter<
             VIEW_TYPE_AGIR -> AgirViewHolder(
                 LayoutInflater.from(parent.context).inflate(R.layout.recycleragir, parent, false)
             )
+
             else -> throw IllegalArgumentException("Type de cours inconnu")
         }
     }
@@ -50,11 +53,21 @@ class CoursAdapter(private var contentList: List<Cours>) : RecyclerView.Adapter<
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val content = contentList[position]
         when (holder.itemViewType) {
-            VIEW_TYPE_CAUSE -> (holder as CauseViewHolder).bind(content)
+            VIEW_TYPE_CAUSE ->{
+                val causeHolder = holder as CauseViewHolder
+                causeHolder.bind(content)
+
+                // Utilisez Picasso pour charger l'image dans l'ImageView
+                Picasso.get().load(content.image).into(causeHolder.imageView)
+            }
             VIEW_TYPE_CONSEQUENCE -> (holder as ConsequenceViewHolder).bind(content)
             VIEW_TYPE_SIGNE -> (holder as SigneViewHolder).bind(content)
             VIEW_TYPE_AGIR -> (holder as AgirViewHolder).bind(content)
+
         }
+
+
+
     }
     fun updateData(newList: List<Cours>) {
         contentList = newList
@@ -80,6 +93,7 @@ class CoursAdapter(private var contentList: List<Cours>) : RecyclerView.Adapter<
 
 
     class CauseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val imageView: ImageView = itemView.findViewById(R.id.imagecause)
         fun bind(content: Cours) {
             itemView.findViewById<TextView>(R.id.txtcause)?.text = content.description
         }
@@ -100,6 +114,7 @@ class CoursAdapter(private var contentList: List<Cours>) : RecyclerView.Adapter<
             itemView.findViewById<TextView>(R.id.textView8)?.text = content.description
         }
     }
+
 }
 
 
