@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:id="@+id/idCauses"
+    android:id="@+id/idsg"
     >
 
     <androidx.cardview.widget.CardView
@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/imagecause"
+            android:id="@+id/imageSigne"
             android:layout_width="229dp"
             android:layout_height="160dp"
             android:scaleType="centerCrop"
@@ -29,7 +29,7 @@
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/txtcause"
+        android:id="@+id/txtSigne"
         android:layout_width="379dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"

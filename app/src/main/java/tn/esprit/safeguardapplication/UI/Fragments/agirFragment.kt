@@ -1,6 +1,6 @@
 package tn.esprit.safeguardapplication.UI.Fragments
 
-import android.content.Context
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,13 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import tn.esprit.safeguardapplication.Api.RetrofitImpl
 import tn.esprit.safeguardapplication.R
-import tn.esprit.safeguardapplication.UI.adapters.AgirAdapter
-import tn.esprit.safeguardapplication.UI.adapters.ConsequenceAdapter
+import tn.esprit.safeguardapplication.UI.adapters.CoursAdapter
 import tn.esprit.safeguardapplication.databinding.FragmentAgirBinding
-import tn.esprit.safeguardapplication.databinding.FragmentCauseBinding
-import tn.esprit.safeguardapplication.databinding.FragmentConsequenceBinding
-import tn.esprit.safeguardapplication.models.Cours
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,6 +32,7 @@ class agirFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
     private lateinit var binding: FragmentAgirBinding
+    private lateinit var coursAdapter: CoursAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,24 +41,38 @@ class agirFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
+    @SuppressLint("MissingInflatedId")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ):View? {
-        binding = FragmentAgirBinding.inflate(inflater, container, false)
+        val view = inflater.inflate(R.layout.fragment_agir, container, false)
 
+        val recyclerView: RecyclerView = view.findViewById(R.id.rvAgir)
+        coursAdapter = CoursAdapter(emptyList())
+        recyclerView.adapter = coursAdapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
-        binding.rvAgir.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
-        binding.rvAgir.adapter = AgirAdapter(getAgirList(requireContext()))
-        return binding.root
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val agirList = RetrofitImpl.api.getAgir()
+
+                if (agirList  != null) {
+
+                    withContext(Dispatchers.Main) {
+                        coursAdapter.updateData(agirList )
+                    }
+                } else {
+
+                }
+            } catch (e: Exception) {
+
+                e.printStackTrace()
+            }
+        }
+
+        return view
     }
 
-    private fun getAgirList(context: Context) : MutableList<Cours>{
-        return  mutableListOf(
-            Cours(R.drawable.tsunamii,"ok",0),
-            Cours(R.drawable.tremblement ,"Tremblement",0)
-        )
 
-    }
 }

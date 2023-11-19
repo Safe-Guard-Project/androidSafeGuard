@@ -2,11 +2,15 @@ package tn.esprit.safeguardapplication.UI.adapters
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.squareup.picasso.Callback
+import com.squareup.picasso.Picasso
 import tn.esprit.safeguardapplication.UI.Activities.CourrActivity
 import tn.esprit.safeguardapplication.databinding.RecyclerprogBinding
 import tn.esprit.safeguardapplication.models.Programme
@@ -41,7 +45,11 @@ class ProgrammeAdapter : RecyclerView.Adapter<ProgrammeAdapter.ProgrammeViewHold
 
         holder.binding.apply {
             val programme = programmes[position]
-            
+
+            Glide.with(holder.binding.root)
+                .load(programme.image)
+                .into(holder.binding.imageRV)
+
             titreProg.text= programme.Titre
             descprog.text= programme.descriptionProgramme
 

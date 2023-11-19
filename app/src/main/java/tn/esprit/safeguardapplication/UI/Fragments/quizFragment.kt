@@ -7,9 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import tn.esprit.safeguardapplication.R
-import tn.esprit.safeguardapplication.UI.adapters.CauseAdapter
-import tn.esprit.safeguardapplication.databinding.FragmentCauseBinding
 import tn.esprit.safeguardapplication.databinding.FragmentQuizBinding
 
 // TODO: Rename parameter arguments, choose names that match
