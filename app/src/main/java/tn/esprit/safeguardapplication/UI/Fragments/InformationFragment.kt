@@ -13,7 +13,6 @@ import tn.esprit.safeguardapplication.UI.adapters.InformationAdapter
 import tn.esprit.safeguardapplication.databinding.FragmentInformationBinding
 import tn.esprit.safeguardapplication.models.Information
 
-
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -30,6 +29,7 @@ class InformationFragment : Fragment() {
     private var param2: String? = null
     private lateinit var binding: FragmentInformationBinding
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -44,38 +44,20 @@ class InformationFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentInformationBinding.inflate(inflater, container, false)
-        binding.rvInformation.layoutManager= LinearLayoutManager(context,  RecyclerView.VERTICAL , false)
 
-        binding.rvInformation.adapter = InformationAdapter(infoList = getInformationList(requireContext()))
 
-        return binding.root
+        binding.rvInformation.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
+        binding.rvInformation.adapter = InformationAdapter(getInfoList(requireContext()))
+        return binding.root }
 
-    }
+    private fun getInfoList(requireContext: Context): MutableList<Information> {
+            return  mutableListOf(
+                Information("tsunami!!!!!!!!!","tsunami","","","","ljmkmjm",0,30,1),
+            )
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment InformationFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            InformationFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
-    private fun getInformationList(context: Context) : MutableList<Information>{
-        return  mutableListOf(
-            Information("tsunami dans 3 heure !!!","","","","","", R.drawable.ic_addimage,0,1)
-        )
+        }
     }
 
 
-}
+
+

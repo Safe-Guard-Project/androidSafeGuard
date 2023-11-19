@@ -13,6 +13,7 @@ class InformationAdapter (val infoList: MutableList<Information>) : RecyclerView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): InformationHolder {
         val binding =  RecyclerinfoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
         return InformationHolder(binding)
 
     }
