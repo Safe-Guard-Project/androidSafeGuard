@@ -1,23 +1,32 @@
 package tn.esprit.safeguardapplication
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import tn.esprit.safeguardapplication.R.*
+import android.view.View
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import tn.esprit.safeguardapplication.UI.Fragments.InformationFragment
 import tn.esprit.safeguardapplication.databinding.ActivityMainBinding
 
 
-    class MainActivity : AppCompatActivity() {
-        private lateinit var binding: ActivityMainBinding
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-            binding = ActivityMainBinding.inflate(layoutInflater)
-            setContentView(binding.root)
+class MainActivity : AppCompatActivity() {
+    private lateinit var binding : ActivityMainBinding
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+        val info = findViewById<ImageView>(R.id.nav_information)
 
-            binding.info.setOnClickListener() {
-                val intent = Intent(this, InformationFragment::class.java)
+        info.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+                val intent = Intent(this@MainActivity, InformationFragment::class.java)
                 startActivity(intent)
+
             }
-        }
+        })
+
+
     }
+
+}
