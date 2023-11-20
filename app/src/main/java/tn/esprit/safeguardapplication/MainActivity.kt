@@ -13,19 +13,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding : ActivityMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         val info = findViewById<ImageView>(R.id.nav_information)
 
-        info.setOnClickListener(object : View.OnClickListener {
-            override fun onClick(v: View) {
-                val intent = Intent(this@MainActivity, InformationFragment::class.java)
-                startActivity(intent)
+        val firstFragment= InformationFragment()
+        info.setOnClickListener(){
+            supportFragmentManager.beginTransaction().replace(R.id.inf , firstFragment).commit()
 
-            }
-        })
-
+        }
 
     }
 
