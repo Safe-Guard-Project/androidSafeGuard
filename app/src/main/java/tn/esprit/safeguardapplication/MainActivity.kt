@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         val firstFragment= InformationFragment()
         info.setOnClickListener(){
-            supportFragmentManager.beginTransaction().replace(R.id.inf , firstFragment).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.container , firstFragment).commit()
 
         }
 
