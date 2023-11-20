@@ -15,7 +15,7 @@ import retrofit2.Call
 import retrofit2.Response
 import tn.esprit.safeguardapplication.Api.ProgrammeApi
 import tn.esprit.safeguardapplication.Api.RetrofitImpl
-import tn.esprit.safeguardapplication.Api.RetrofitImpl.Companion.api
+
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.UI.adapters.ProgrammeAdapter
 import tn.esprit.safeguardapplication.databinding.ActivityProgrammeBinding

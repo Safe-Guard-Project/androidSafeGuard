@@ -1,10 +1,13 @@
 package tn.esprit.safeguardapplication.UI.Fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -13,23 +16,23 @@ import tn.esprit.safeguardapplication.Api.RetrofitImpl
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.databinding.ActivityProgrammeBinding
 import tn.esprit.safeguardapplication.databinding.FragmentIntroBinding
+import tn.esprit.safeguardapplication.models.Favori
+import tn.esprit.safeguardapplication.viewmodels.CommentaireViewModel
+import tn.esprit.safeguardapplication.viewmodels.FavoriViewModel
 
 // TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [introFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class introFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
     private var isFavFilled = false
     private lateinit var binding: FragmentIntroBinding
+    private lateinit var viewModel: FavoriViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,25 +48,27 @@ class introFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentIntroBinding.inflate(inflater, container, false)
+
         return binding.root
 
-        /*return inflater.inflate(R.layout.fragment_intro, container, false)*/
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Gérez le clic sur le bouton de cœur ici
+        viewModel = ViewModelProvider(this).get(FavoriViewModel::class.java)
+
         binding.favBtnV.setOnClickListener {
-            // Changez l'image du cœur en fonction de l'état actuel
+
             if (isFavFilled) {
-                // Si le cœur est rempli, changez à l'état vide
+
                 binding.favBtnV.setImageResource(R.drawable.ic_favoritevide)
             } else {
-                // Si le cœur est vide, changez à l'état rempli
+
                 binding.favBtnV.setImageResource(R.drawable.ic_favorite)
+                addToFavorites()
             }
 
-            // Inversez l'état actuel du cœur
+
             isFavFilled = !isFavFilled
         }
 
@@ -75,14 +80,37 @@ class introFragment : Fragment() {
                     withContext(Dispatchers.Main) {binding.textView5.text = introductionList[0].description
                     }
                 } else {
-                    // Gérer le cas où la liste est null
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
-                // Gérer les erreurs lors de l'appel à l'API
             }
         }
 
 
+    }
+    private fun addToFavorites() {
+        // Tu devrais remplacer ces valeurs par celles que tu veux envoyer au backend
+        val favori = Favori(
+            _id = "id de fav",
+            idRessourceProgramme = "65590e31c34eba3a779aca70"
+
+        )
+
+        // Utiliser le viewModel pour ajouter aux favoris
+        viewModel.viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = viewModel.addFav(favori)
+
+
+                if (response.isSuccessful) {
+
+                    Log.d("LivraisonActivity", "Request successful")
+                } else {
+                    Log.e("LivraisonActivity", "Request failed: ${response.code()}")
+                }
+            } catch (e: Exception) {
+                Log.e("LivraisonActivity", "Exception: ${e.message}")
+            }
+        }
     }
 }

@@ -1,13 +1,16 @@
 package tn.esprit.safeguardapplication.models
 
 import androidx.room.Entity
+import androidx.room.ForeignKey
+import androidx.room.PrimaryKey
 
-@Entity
+
+
 data class Cours (
     val _id: String,
-    val Type : type ,
-    val image: String ,
-    val description: String ,
+    val Type : type,
+    val image: String,
+    val description: String,
     val idProgramme: String
 
     )
@@ -15,5 +18,6 @@ data class Cours (
     enum class type {
         Introduction,CAUSE, CONSEQUENCE, SIGNE , Agir
     }
+
 }
 

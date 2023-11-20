@@ -58,7 +58,7 @@ class CoursAdapter(private var contentList: List<Cours>) : RecyclerView.Adapter<
                 causeHolder.bind(content)
 
                 // Utilisez Picasso pour charger l'image dans l'ImageView
-                Picasso.get().load(content.image).into(causeHolder.imageView)
+
             }
             VIEW_TYPE_CONSEQUENCE -> (holder as ConsequenceViewHolder).bind(content)
             VIEW_TYPE_SIGNE -> (holder as SigneViewHolder).bind(content)

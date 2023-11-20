@@ -19,6 +19,7 @@ import tn.esprit.safeguardapplication.databinding.RecyclerprogBinding
 import tn.esprit.safeguardapplication.models.Programme
 import javax.sql.DataSource
 import android.graphics.drawable.Drawable
+import tn.esprit.safeguardapplication.models.Cours
 
 class ProgrammeAdapter : RecyclerView.Adapter<ProgrammeAdapter.ProgrammeViewHolder> (){
 
@@ -50,14 +51,10 @@ class ProgrammeAdapter : RecyclerView.Adapter<ProgrammeAdapter.ProgrammeViewHold
 
         holder.binding.apply {
             val programme = programmes[position]
-
-            Glide.with(holder.binding.root)
-                .load(programme.image)
-                .into(holder.binding.imageRV)
-
+            Glide.with(root.context)
+                .load("http://10.0.2.2:9090/"+programme.image).into(imageRV)
             titreProg.text= programme.Titre
             descprog.text= programme.descriptionProgramme
-
         }
 
         holder.binding.card.setOnClickListener {
