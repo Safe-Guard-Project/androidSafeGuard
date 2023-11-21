@@ -22,7 +22,7 @@ class RetrofitImpl {
         val api: ProgrammeApi by lazy {
 
             Retrofit.Builder()
-                .baseUrl("http://192.168.1.54:9090/")
+                .baseUrl("http://192.168.7.131:9090/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -32,7 +32,7 @@ class RetrofitImpl {
 
 
             Retrofit.Builder()
-                .baseUrl("http://192.168.1.54:9090/")
+                .baseUrl("http://192.168.7.131:9090/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -42,7 +42,7 @@ class RetrofitImpl {
 
 
             Retrofit.Builder()
-                .baseUrl("http://192.168.1.54:9090/")
+                .baseUrl("http://192.168.7.131:9090/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
@@ -51,7 +51,7 @@ class RetrofitImpl {
 
         val feedBApi :FeedBApi by lazy {
             Retrofit.Builder()
-                .baseUrl("http://192.168.1.54:9090/")
+                .baseUrl("http://192.168.7.131:9090/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

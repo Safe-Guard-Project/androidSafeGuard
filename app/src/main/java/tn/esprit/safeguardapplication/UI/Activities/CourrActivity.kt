@@ -88,7 +88,6 @@ class CourrActivity : AppCompatActivity() {
 
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-
         menuInflater.inflate(R.menu.courr, menu)
         return true
     }
