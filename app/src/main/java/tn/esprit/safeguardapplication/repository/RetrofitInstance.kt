@@ -4,7 +4,7 @@
     import okhttp3.logging.HttpLoggingInterceptor
     import retrofit2.Retrofit
     import retrofit2.converter.gson.GsonConverterFactory
-    import tn.esprit.safeguardapplication.api.UserApiService
+    import tn.esprit.safeguardapplication.Api.UserApiService
 
     object RetrofitInstance {
         val api: UserApiService by lazy {
@@ -16,7 +16,7 @@
                 .build()
 
             Retrofit.Builder()
-                .baseUrl("http://192.168.1.13:9090/user/")
+                .baseUrl("http://172.16.5.100:9090/user/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()

@@ -1,4 +1,4 @@
-package tn.esprit.safeguardapplication.ui.activities
+package tn.esprit.safeguardapplication.UI.Activities
 
 import android.os.Bundle
 import android.util.Log
@@ -8,8 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.viewmodels.DisplayUserProfileViewModel
-import tn.esprit.safeguardapplication.models.User
-import tn.esprit.safeguardapplication.repository.Resource
 import tn.esprit.safeguardapplication.repository.RetrofitInstance
 import tn.esprit.safeguardapplication.repository.UserRepository
 import tn.esprit.safeguardapplication.repository.UserRepositoryImpl
@@ -61,7 +59,7 @@ class DisplayUserProfileActivity : AppCompatActivity() {
                 // Update UI with user profile data
                 txtFullName.text = R.id.txtFullName.toString()
                 txtEmail.text = R.id.txtEmail.toString()
-                txtNumTel.text = R.id.numeroTel.toString()
+                txtNumTel.text = R.id.txtNumTel.toString()
             } else {
                 // Handle null user profile
                 Log.e("DisplayUserProfile", "User is null")

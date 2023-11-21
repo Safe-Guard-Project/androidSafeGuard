@@ -17,13 +17,13 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".ui.activities.DisplayUserProfileActivity"
+            android:name=".UI.Activities.DisplayUserProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.SignInActivity"
+            android:name=".UI.Activities.SignInActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.SplashScreen"
+            android:name=".UI.Activities.SplashScreen"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,10 +32,10 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.activities.SignUpActivity"
+            android:name=".UI.Activities.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.activities.DisplayUserProfileActivity"
+            android:name=".UI.Activities.DisplayUserProfileActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

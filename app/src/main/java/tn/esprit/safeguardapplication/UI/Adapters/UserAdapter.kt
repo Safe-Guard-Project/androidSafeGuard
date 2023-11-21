@@ -1,4 +1,4 @@
-package tn.esprit.safeguardapplication.ui.adapters
+package tn.esprit.safeguardapplication.UI.Adapters
 
 import android.content.Context
 import android.view.LayoutInflater

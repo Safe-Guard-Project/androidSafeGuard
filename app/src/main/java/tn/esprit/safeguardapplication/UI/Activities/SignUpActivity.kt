@@ -1,4 +1,4 @@
-package tn.esprit.safeguardapplication.ui.activities
+package tn.esprit.safeguardapplication.UI.Activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -12,7 +12,6 @@ import tn.esprit.safeguardapplication.repository.RetrofitInstance
 import tn.esprit.safeguardapplication.repository.UserRepository
 import tn.esprit.safeguardapplication.repository.UserRepositoryImpl
 import tn.esprit.safeguardapplication.viewmodels.SignUpViewModel // Change the import to SignUpViewModel
-import tn.esprit.safeguardapplication.api.UserApiService
 
 const val SIGN_UP_TAG = "SignUp Activity"
 

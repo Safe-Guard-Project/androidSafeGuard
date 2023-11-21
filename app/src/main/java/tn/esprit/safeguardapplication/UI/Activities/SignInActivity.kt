@@ -1,4 +1,4 @@
-package tn.esprit.safeguardapplication.ui.activities
+package tn.esprit.safeguardapplication.UI.Activities
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,13 +6,13 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.ViewModelProvider
-import tn.esprit.safeguardapplication.MainActivity
 import tn.esprit.safeguardapplication.databinding.ActivitySignInBinding
 import tn.esprit.safeguardapplication.repository.RetrofitInstance
 import tn.esprit.safeguardapplication.repository.UserRepository
 import tn.esprit.safeguardapplication.repository.UserRepositoryImpl
 import tn.esprit.safeguardapplication.viewmodels.SignInViewModel
-import tn.esprit.safeguardapplication.api.UserApiService
+import tn.esprit.safeguardapplication.util.SharedPreferencesUtils
+
 const val SIGN_IN_TAG = "SignIn Activity"
 
 class SignInActivity : ComponentActivity() {
@@ -47,7 +47,6 @@ class SignInActivity : ComponentActivity() {
     private fun observeSignIn() {
         Log.d(SIGN_IN_TAG, "observeSignIn: Button Clicked!")
 
-
         binding.SigninB.setOnClickListener {
             val email = binding.emailsi.text.toString()
             val password = binding.passwordsi.text.toString()
@@ -56,7 +55,21 @@ class SignInActivity : ComponentActivity() {
 
             viewModel.signIn(email, password).observe(this@SignInActivity) { response ->
                 if (response != null) {
+               
                     // Sign-in successful, navigate to the next screen or perform other actions
+                    String id = jwt.getId();
+
+
+                    val decoder = JWTDecoder.decode(jwtToken)
+                    val payload = decoder.payload
+                    val userId = payload["_id"] // Extract user ID from the payload
+
+                    // Store user ID in SharedPreferences
+                    val sharedPreferences = getSharedPreferences(SharedPreferencesUtils.SHARED_PREFS_NAME, MODE_PRIVATE)
+                    val editor = sharedPreferences.edit()
+                    editor.putString("userId", userId)
+                    editor.apply()
+
                     val intent = Intent(this@SignInActivity, DisplayUserProfileActivity::class.java)
                     startActivity(intent)
                     finish()
@@ -66,7 +79,6 @@ class SignInActivity : ComponentActivity() {
                 }
             }
         }
-
-
     }
+
 }

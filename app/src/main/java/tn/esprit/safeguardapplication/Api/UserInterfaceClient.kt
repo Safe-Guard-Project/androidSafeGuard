@@ -1,4 +1,4 @@
-package tn.esprit.safeguardapplication.api
+package tn.esprit.safeguardapplication.Api
 
 import android.util.Log
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
