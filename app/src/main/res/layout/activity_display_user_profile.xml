@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/txtEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/poppins_thin"
+        android:gravity="center"
+        android:text="@string/email_here"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtFullName" />
+
+    <TextView
+        android:id="@+id/txtFullName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/poppins_thin"
+        android:gravity="center"
+        android:text="@string/name_here"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profilePic" />
+    <TextView
+        android:id="@+id/txtNumTel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:fontFamily="@font/poppins_thin"
+        android:gravity="center"
+        android:text="@string/numeroTel_here"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
+
+    <ImageView
+        android:id="@+id/profilePic"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_account_circle"
+        app:tint="@color/black"
+        tools:ignore="ContentDescription" />
+
+    <ImageView
+        android:id="@+id/component4"
+        android:layout_width="172dp"
+        android:layout_height="123dp"
+        android:layout_marginTop="316dp"
+        android:layout_marginEnd="264dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtNumTel"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/group_2" />
+
+    <ImageView
+        android:id="@+id/component3"
+        android:layout_width="153dp"
+        android:layout_height="146dp"
+        app:layout_constraintStart_toEndOf="@+id/profilePic"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/group_1" />
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+</RelativeLayout>

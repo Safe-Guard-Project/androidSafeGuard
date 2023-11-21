@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:backgroundTint="#0047FF">
+
+    <ImageView
+        android:id="@+id/imageView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="240dp"
+        android:layout_marginBottom="509dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:srcCompat="@drawable/group_1" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="600dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/group_2" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="166dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="49dp"
+        android:layout_marginTop="76dp"
+        android:layout_marginEnd="25dp"
+        android:fontFamily="@font/poppins_thin"
+        android:textSize="34sp"
+        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Sign up" />
+
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/fullnamesu"
+        android:layout_width="336dp"
+        android:layout_height="40dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/rounded_corners"
+        android:hint="@string/EnterFullName"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/emailsu"
+        android:layout_width="334dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="40dp"
+        android:background="@drawable/rounded_corners"
+        android:hint="@string/EnterEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.714"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fullnamesu">
+
+    </com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/passwordsu"
+        android:layout_width="333dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/rounded_corners"
+        android:hint="@string/EnterPPass"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/emailsu"></com.google.android.material.textfield.TextInputEditText>
+
+    <com.google.android.material.textfield.TextInputEditText
+        android:id="@+id/numeroTel"
+        android:layout_width="333dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="36dp"
+        android:background="@drawable/rounded_corners"
+        android:hint="@string/EnterTel"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.705"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordsu"></com.google.android.material.textfield.TextInputEditText>
+
+    <CheckBox
+        android:id="@+id/checkBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/numeroTel" />
+
+    <TextView
+        android:id="@+id/textView14"
+        android:layout_width="277dp"
+        android:layout_height="47dp"
+        android:layout_marginTop="88dp"
+        android:layout_marginEnd="64dp"
+        android:fontFamily="@font/poppins_thin"
+        android:text="@string/Agreement"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/passwordsu" />
+
+    <Button
+        android:id="@+id/signupB"
+        android:layout_width="173dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="44dp"
+        android:backgroundTint="#0047FF"
+        android:fontFamily="@font/poppins_thin"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        android:text="Sign up ➞" />
+
+
+    <TextView
+        android:id="@+id/textView15"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="36dp"
+        android:fontFamily="@font/poppins_thin"
+        android:text="@string/SugLogin"
+        app:layout_constraintEnd_toStartOf="@+id/textView16"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signupB" />
+
+    <TextView
+        android:id="@+id/switchSignupLoginButton"
+        android:layout_width="51dp"
+        android:layout_height="32dp"
+        android:layout_marginEnd="60dp"
+        android:fontFamily="@font/poppins_thin"
+        android:text="@string/login"
+        app:layout_constraintBottom_toBottomOf="@+id/textView15"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textView15"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <ImageView
+        android:id="@+id/imageView12"
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="188dp"
+        android:backgroundTint="#D6C7C7"
+        app:tint="#000000"
+        app:layout_constraintBottom_toTopOf="@+id/textView10"
+        app:layout_constraintEnd_toStartOf="@+id/imageView10"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.272"
+        app:srcCompat="@drawable/ic_arrow_back" />
+</androidx.constraintlayout.widget.ConstraintLayout>
