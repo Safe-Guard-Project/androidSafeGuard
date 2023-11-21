@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "265896761530",
+    "project_id": "safeguardapplication",
+    "storage_bucket": "safeguardapplication.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:265896761530:android:5be1a2f5d82c034406ca83",
+        "android_client_info": {
+          "package_name": "tn.esprit.safeguardapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAksacsFW-M7M2NYlcBxTs_wlr5FpE7ui0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
