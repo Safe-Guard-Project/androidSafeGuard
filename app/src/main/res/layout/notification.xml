@@ -9,24 +9,39 @@
 
         <ImageView
             android:id="@+id/notifLogo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@drawable/earthquake"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            ></ImageView>
-        
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="20dp"
+            android:src="@drawable/earthquake"></ImageView>
+
         <TextView
             android:id="@+id/notifTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="You are in the Radius of a catastrophe"
-            android:textSize="20sp"
-            android:textStyle="bold"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="20dp"
             android:layout_toRightOf="@+id/notifLogo"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="15dp"
-            ></TextView>
+            android:text="You are in the Radius of a catastrophe"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/notifDescription"
+            android:layout_width="301dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/notifTitle"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="19dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginEnd="18dp"
+            android:layout_toEndOf="@+id/notifLogo"
+            android:text="placeholder: this is the description"
+            android:textColor="@color/white"
+            android:textSize="12sp"></TextView>
+
     </RelativeLayout>
 
 

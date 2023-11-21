@@ -17,10 +17,11 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             // Handle the data payload
             // You can parse the data and customize the notification accordingly
             val name = remoteMessage.data["name"]
-            val data = remoteMessage.data["data"]
+            val description = remoteMessage.data["description"]
+
 
             // Display notification
-            NotificationUtils.showNotification(applicationContext, name, data)
+            NotificationUtils.showNotification(applicationContext, name, description)
         }
 
         // Check if the message contains a notification payload
