@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardElevation="0dp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardUseCompatPadding="false">
+
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content">
+
+
+           <TextView
+               android:id="@+id/textfeedbk"
+               android:layout_width="293dp"
+               android:layout_height="55dp"
+               android:layout_marginTop="10dp"
+               android:layout_marginBottom="10dp"
+               android:text="Votre avis"
+               android:textColor="@color/black"
+               android:textSize="19dp"
+               android:textStyle="italic"
+               app:layout_constraintBottom_toBottomOf="parent"
+               app:layout_constraintEnd_toEndOf="parent"
+               app:layout_constraintHorizontal_bias="0.144"
+               app:layout_constraintStart_toStartOf="parent"
+               app:layout_constraintTop_toTopOf="parent"
+               app:layout_constraintVertical_bias="0.466" />
+
+           <ImageButton
+               android:id="@+id/buttonModif"
+               android:layout_width="46dp"
+               android:layout_height="59dp"
+               android:layout_alignParentEnd="true"
+               android:layout_alignParentBottom="true"
+               android:layout_marginTop="0dp"
+
+               android:layout_marginEnd="0dp"
+               android:background="?attr/selectableItemBackgroundBorderless"
+               android:contentDescription="Send"
+               android:scaleType="centerCrop"
+               android:src="@drawable/ic_modif" />
+
+           <ImageButton
+               android:id="@+id/buttonSupp"
+               android:layout_width="46dp"
+               android:layout_height="59dp"
+               android:layout_alignParentEnd="true"
+               android:layout_alignParentBottom="true"
+               android:layout_marginTop="0dp"
+
+               android:layout_marginEnd="0dp"
+               android:background="?attr/selectableItemBackgroundBorderless"
+               android:contentDescription="Send"
+               android:scaleType="centerCrop"
+               android:src="@drawable/ic_delete" />
+
+
+       </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

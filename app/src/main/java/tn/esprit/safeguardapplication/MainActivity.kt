@@ -3,6 +3,7 @@ package tn.esprit.safeguardapplication
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import tn.esprit.safeguardapplication.UI.Activities.ui.FeedBack
 import tn.esprit.safeguardapplication.UI.Activities.ui.ProgrammeActivity
 import tn.esprit.safeguardapplication.databinding.ActivityMainBinding
 
@@ -17,5 +18,10 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, ProgrammeActivity::class.java)
             startActivity(intent)
         }
+        binding.buttonFeedback.setOnClickListener() {
+            val intent = Intent(this, FeedBack::class.java)
+            startActivity(intent)
+        }
+
     }
 }

@@ -7,6 +7,7 @@
 
     <application
         android:allowBackup="true"
+        android:allowClearUserData="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -15,8 +16,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SafeGuardApplication"
         android:usesCleartextTraffic="true"
-        android:allowClearUserData="true"
         tools:targetApi="31">
+        <activity
+            android:name=".UI.Activities.ui.FeedBack"
+            android:exported="false" />
         <activity
             android:name=".UI.Activities.ui.ProgrammeActivity"
             android:exported="false" />

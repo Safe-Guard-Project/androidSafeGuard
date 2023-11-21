@@ -25,8 +25,7 @@ interface ProgrammeApi {
     suspend fun getAgir(): List<Cours>
     @GET("cours/Introduction")
     suspend fun getIntro(): List<Cours>
-    @GET("cours/idProg/{id}")
-    suspend fun getCoursByProgramme(@Path("id") progId:String): List<Cours>
+
 
 
 

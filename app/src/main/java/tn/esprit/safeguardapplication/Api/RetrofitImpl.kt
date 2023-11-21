@@ -12,54 +12,51 @@ import tn.esprit.safeguardapplication.models.Programme
 class RetrofitImpl {
 
     companion object {
+        private val interceptor = HttpLoggingInterceptor().apply {
+        level =HttpLoggingInterceptor.Level.BODY}
+        private  val client = OkHttpClient.Builder()
+            .addInterceptor(interceptor)
+            .build()
 
 
         val api: ProgrammeApi by lazy {
-            val interceptor = HttpLoggingInterceptor()
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
-
-            val client = OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build()
 
             Retrofit.Builder()
-                .baseUrl("http://192.168.82.131:9090/")
+                .baseUrl("http://192.168.1.54:9090/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(ProgrammeApi::class.java)
         }
         val commentApi: CommentApi by lazy {
-            val interceptor = HttpLoggingInterceptor()
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build()
 
             Retrofit.Builder()
-                .baseUrl("http://192.168.82.131:9090/")
+                .baseUrl("http://192.168.1.54:9090/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(CommentApi::class.java)
         }
         val favApi: FavApi by lazy {
-            val interceptor = HttpLoggingInterceptor()
-            interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-            val client = OkHttpClient.Builder()
-                .addInterceptor(interceptor)
-                .build()
 
             Retrofit.Builder()
-                .baseUrl("http://192.168.82.131:9090/")
+                .baseUrl("http://192.168.1.54:9090/")
                 .client(client)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(FavApi::class.java)
         }
 
+        val feedBApi :FeedBApi by lazy {
+            Retrofit.Builder()
+                .baseUrl("http://192.168.1.54:9090/")
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+                .create(FeedBApi::class.java)
+        }
 
 
 
