@@ -28,13 +28,40 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/NewBlog"
+                    android:id="@+id/newInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="8dp"
                     android:layout_weight="1"
-                    android:text="   Blog"
+                    android:text="New Information"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Title"
+                    style="@style/AppTextStyle"
+                    android:layout_width="136dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Title:" />
+
+                <EditText
+                    android:id="@+id/editTextTitle"
+                    android:layout_width="119dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/gris"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:hint=" title"
+                    />
+
             </LinearLayout>
 
             <LinearLayout
@@ -44,7 +71,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/typeCatastrophe"
+                    android:id="@+id/CatastrophType"
                     style="@style/AppTextStyle"
                     android:layout_width="136dp"
                     android:layout_height="match_parent"
@@ -125,17 +152,18 @@
                 <TextView
                     android:id="@+id/datePrevention"
                     style="@style/AppTextStyle"
-                    android:layout_width="368dp"
-                    android:layout_height="match_parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="63dp"
                     android:layout_weight="1"
                     android:gravity="center_vertical"
                     android:text="Select Date: " />
 
                 <CalendarView
                     android:id="@+id/calendarView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:layout_weight="1" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -167,11 +195,37 @@
                     <RadioButton
                         android:id="@+id/radioButtonNotYet"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:text="Not Yet" />
                 </RadioGroup>
             </LinearLayout>
 
+
+            <LinearLayout
+                android:id="@+id/LiabilitiesPercent"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/LP"
+                    style="@style/AppTextStyle"
+                    android:layout_width="232dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Liability Percentage :" />
+
+                <EditText
+                    android:id="@+id/editTextLP"
+                    android:layout_width="221dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@color/gris"
+                    android:ems="10"
+                    android:hint="Your Liability" />
+            </LinearLayout>
 
             <EditText
 
@@ -181,12 +235,12 @@
                 android:layout_marginTop="30dp"
                 android:background="@drawable/rounded_edittext"
                 android:gravity="center"
-                android:hint="Enter Description" />
+                android:hint="Your Description" />
 
             <ImageButton
                 android:id="@+id/btnAddImage"
-                android:layout_width="120dp"
-                android:layout_height="69dp"
+                android:layout_width="114dp"
+                android:layout_height="93dp"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:scaleType="fitXY"

@@ -6,6 +6,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import tn.esprit.safeguardapplication.R
@@ -18,11 +20,7 @@ import tn.esprit.safeguardapplication.models.Information
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [InformationFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class InformationFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -37,6 +35,8 @@ class InformationFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
+
+
     }
 
     override fun onCreateView(
@@ -46,15 +46,30 @@ class InformationFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = FragmentInformationBinding.inflate(inflater, container, false)
 
-
         binding.rvInformation.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         binding.rvInformation.adapter = InformationAdapter(getInfoList(requireContext()))
-        return binding.root }
+         val v= inflater.inflate(R.layout.recyclerinfo,container,false)
+        val bt= v.findViewById<Button>(R.id.buttonShowMore)
+        bt.setOnClickListener(){
+            val detailinfo = DetailInfoFragment()
+            val transaction: FragmentTransaction =  requireFragmentManager().beginTransaction()
+            transaction.replace(R.id.rvInformation,detailinfo)
+            transaction.commit()
+
+        }
+        return binding.root
+
+
+
+
+    }
 
     private fun getInfoList(requireContext: Context): MutableList<Information> {
             return  mutableListOf(
                 Information("tsunami!!!!!!!!!","tsunami","","","","ljmkmjm",0,30,1),
-            )
+                Information("inondation!!!!!!!!!","tsunami","","","","ljmkmjm",0,30,1),
+
+                )
 
         }
     }

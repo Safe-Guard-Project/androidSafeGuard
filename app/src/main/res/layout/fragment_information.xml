@@ -13,21 +13,21 @@
         android:id="@+id/rvInformation"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        tools:listitem="@layout/recyclerinfo"
-        android:background="@color/background"/>
+        tools:listitem="@layout/recyclerinfo" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floatingActionButton"
-        android:layout_width="366dp"
-        android:layout_height="wrap_content"
+        android:layout_width="162dp"
+        android:layout_height="96dp"
         android:clickable="true"
-        android:src="@drawable/rounded_button"
-        android:contentDescription="@string/fab_content_description"/>
+        android:contentDescription="@string/fab_content_description"
+        android:src="@drawable/rounded_button" />
 
 </FrameLayout>

@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UI.Fragments.AddInfoFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <LinearLayout
+            android:id="@+id/addBlog"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp"
+            android:background="@color/background"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="1dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/newInfo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="8dp"
+                    android:layout_weight="1"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Display2" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="374dp"
+                android:layout_height="247dp"
+                android:layout_weight="1"
+                 />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/CatastrophType"
+                    style="@style/AppTextStyle"
+                    android:layout_width="136dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="Catastroph type: " />
+
+                <TextView
+                    android:id="@+id/textViewCT"
+                    style="@style/AppTextStyle"
+                    android:layout_width="134dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/Country"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="Country : " />
+
+                <TextView
+                    android:id="@+id/textViewCountry"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/region"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="Region:" />
+
+                <TextView
+                    android:id="@+id/textViewRegion"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/statement"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="Statement:" />
+
+                <TextView
+                    android:id="@+id/textViewStatement"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="TextView" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/DatePrevention"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="Prevention Date :" />
+
+                <TextView
+                    android:id="@+id/textViewPD"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/PercentLiabilities"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="Liabilities Percent: " />
+
+                <TextView
+                    android:id="@+id/textViewPL"
+                    style="@style/AppTextStyle"
+                    android:layout_width="226dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@dimen/cardview_compat_inset_shadow"
+                    android:gravity="center_vertical"
+                    android:text="TextView" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewdescrption"
+                style="@style/AppTextStyle"
+                android:layout_width="377dp"
+                android:layout_height="112dp"
+                android:layout_weight="1"
+                android:alpha="@dimen/cardview_compat_inset_shadow"
+                android:gravity="center_vertical"
+                android:text="TextView" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>
