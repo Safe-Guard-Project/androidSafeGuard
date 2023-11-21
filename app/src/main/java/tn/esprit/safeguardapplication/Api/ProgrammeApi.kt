@@ -9,8 +9,11 @@ import tn.esprit.safeguardapplication.models.Programme
 
 interface ProgrammeApi {
 
-    @GET("programme/")
+    @GET("programme/cours")
     suspend fun getProgrammes(): Response<List<Programme>>
+   @GET("programme/cours")
+   suspend fun getProgrammesWithCours(): Response<List<Programme>>
+
     @GET("cours/")
     suspend fun getCours(): List<Cours>
     @GET("cours/CAUSE")

@@ -44,7 +44,7 @@ class ProgrammeActivity : AppCompatActivity() {
         lifecycleScope.launch {
             binding.progressBar.isVisible = true
 
-            viewModel.getProgrammes().observe(this@ProgrammeActivity, { programmes ->
+            viewModel.getProgrammesWithCours().observe(this@ProgrammeActivity, { programmes ->
                 binding.progressBar.isVisible = false
 
                 if (programmes != null) {

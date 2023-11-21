@@ -8,6 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.squareup.picasso.Picasso
 
 import tn.esprit.safeguardapplication.R
@@ -93,20 +94,32 @@ class CoursAdapter(private var contentList: List<Cours>) : RecyclerView.Adapter<
 
 
     class CauseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val imageView: ImageView = itemView.findViewById(R.id.imagecause)
+        private val imageView: ImageView = itemView.findViewById(R.id.imagecause)
+
         fun bind(content: Cours) {
             itemView.findViewById<TextView>(R.id.txtcause)?.text = content.description
+            Glide.with(itemView.context)
+                .load("http://10.0.2.2:9090/" + content.image)
+                .into(imageView)
         }
     }
     class ConsequenceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val imageView: ImageView = itemView.findViewById(R.id.imagecons)
         fun bind(content: Cours) {
             itemView.findViewById<TextView>(R.id.txtcons)?.text = content.description
+            Glide.with(itemView.context)
+                .load("http://10.0.2.2:9090/" + content.image)
+                .into(imageView)
         }
     }
 
     class SigneViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val imageView: ImageView = itemView.findViewById(R.id.imageSigne)
         fun bind(content: Cours) {
             itemView.findViewById<TextView>(R.id.txtSigne)?.text = content.description
+            Glide.with(itemView.context)
+                .load("http://10.0.2.2:9090/" + content.image)
+                .into(imageView)
         }
     }
     class AgirViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

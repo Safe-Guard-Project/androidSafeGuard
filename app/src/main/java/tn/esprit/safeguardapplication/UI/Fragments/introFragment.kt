@@ -51,6 +51,7 @@ class introFragment : Fragment() {
 
         return binding.root
 
+
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -77,7 +78,8 @@ class introFragment : Fragment() {
                 val introductionList = RetrofitImpl.api.getIntro()
 
                 if (introductionList != null) {
-                    withContext(Dispatchers.Main) {binding.textView5.text = introductionList[0].description
+                    withContext(Dispatchers.Main) {
+                        binding.textView5.text = introductionList[0].description
                     }
                 } else {
                 }
@@ -104,12 +106,12 @@ class introFragment : Fragment() {
 
                 if (response.isSuccessful) {
 
-                    Log.d("LivraisonActivity", "Request successful")
+                    Log.d("intoActivity", "Request successful")
                 } else {
-                    Log.e("LivraisonActivity", "Request failed: ${response.code()}")
+                    Log.e("intoActivity", "Request failed: ${response.code()}")
                 }
             } catch (e: Exception) {
-                Log.e("LivraisonActivity", "Exception: ${e.message}")
+                Log.e("intoActivity", "Exception: ${e.message}")
             }
         }
     }

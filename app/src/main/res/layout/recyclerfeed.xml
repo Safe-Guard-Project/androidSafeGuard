@@ -25,9 +25,10 @@
 
            <TextView
                android:id="@+id/textfeedbk"
-               android:layout_width="293dp"
-               android:layout_height="55dp"
+               android:layout_width="316dp"
+               android:layout_height="52dp"
                android:layout_marginTop="10dp"
+               android:layout_marginRight="10dp"
                android:layout_marginBottom="10dp"
                android:text="Votre avis"
                android:textColor="@color/black"
@@ -42,8 +43,8 @@
 
            <ImageButton
                android:id="@+id/buttonModif"
-               android:layout_width="46dp"
-               android:layout_height="59dp"
+               android:layout_width="30dp"
+               android:layout_height="40dp"
                android:layout_alignParentEnd="true"
                android:layout_alignParentBottom="true"
                android:layout_marginTop="0dp"
@@ -56,8 +57,8 @@
 
            <ImageButton
                android:id="@+id/buttonSupp"
-               android:layout_width="46dp"
-               android:layout_height="59dp"
+               android:layout_width="30dp"
+               android:layout_height="40dp"
                android:layout_alignParentEnd="true"
                android:layout_alignParentBottom="true"
                android:layout_marginTop="0dp"
