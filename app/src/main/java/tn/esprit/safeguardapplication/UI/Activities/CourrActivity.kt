@@ -68,7 +68,7 @@ class CourrActivity : AppCompatActivity() {
 
 /////post Comment
         binding.buttonSend.setOnClickListener(){
-           
+
             val commentaire = Commentaire(
                 _id = "id comment",
                 textComment = binding.idcmm.text.toString() ,
@@ -81,6 +81,7 @@ class CourrActivity : AppCompatActivity() {
 
 
                     if (response.isSuccessful) {
+                        binding.idcmm.text?.clear()
 
                         Log.d("coursActivity", "Request successful")
                     } else {

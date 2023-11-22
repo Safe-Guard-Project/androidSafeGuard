@@ -12,7 +12,7 @@ import tn.esprit.safeguardapplication.UI.Activities.CourrActivity
 import tn.esprit.safeguardapplication.databinding.RecyclerprogBinding
 import tn.esprit.safeguardapplication.models.Programme
 
-class ProgrammeAdapter : RecyclerView.Adapter<ProgrammeAdapter.ProgrammeViewHolder> (){
+class ProgrammeAdapter : RecyclerView.Adapter<ProgrammeAdapter.ViewHolder> (){
 
     private val diffCallback = object : DiffUtil.ItemCallback<Programme>(){
         override fun areContentsTheSame(oldItem: Programme, newItem: Programme): Boolean {
@@ -30,15 +30,15 @@ class ProgrammeAdapter : RecyclerView.Adapter<ProgrammeAdapter.ProgrammeViewHold
         get() = differ.currentList
         set(value) { differ.submitList(value)}
     override fun getItemCount()= programmes.size
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProgrammeViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding =  RecyclerprogBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ProgrammeViewHolder(binding)
+        return ViewHolder(binding)
     }
 
 
 
 
-    override fun onBindViewHolder(holder: ProgrammeViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         holder.binding.apply {
             val programme = programmes[position]
@@ -58,6 +58,6 @@ class ProgrammeAdapter : RecyclerView.Adapter<ProgrammeAdapter.ProgrammeViewHold
 
     }
 
-    inner class ProgrammeViewHolder(val binding:RecyclerprogBinding) : RecyclerView.ViewHolder(binding.root)
+    inner class ViewHolder(val binding:RecyclerprogBinding) : RecyclerView.ViewHolder(binding.root)
 
 }

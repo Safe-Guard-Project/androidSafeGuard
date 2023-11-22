@@ -10,13 +10,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.launch
-import tn.esprit.safeguardapplication.R
+
 import tn.esprit.safeguardapplication.UI.Activities.CourrActivity
 import tn.esprit.safeguardapplication.UI.adapters.FeedAdapter
 import tn.esprit.safeguardapplication.databinding.ActivityFeedBackBinding
-import tn.esprit.safeguardapplication.databinding.ActivityProgrammeBinding
-import tn.esprit.safeguardapplication.models.Commentaire
-import tn.esprit.safeguardapplication.models.Cours
+
 import tn.esprit.safeguardapplication.viewmodels.FeedViewModel
 
 
