@@ -2,6 +2,7 @@ package tn.esprit.safeguardapplication.repository
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import tn.esprit.safeguardapplication.Api.MapApiTarjetSecurise
 import tn.esprit.safeguardapplication.Api.ZoneDeDangerApi
 
 object RetrofitInstance {
@@ -17,6 +18,9 @@ object RetrofitInstance {
 
     val ApiZoneDeDanger: ZoneDeDangerApi by lazy {
         retrofit.create(ZoneDeDangerApi::class.java)
+    }
+    val apiTarjetSecurise: MapApiTarjetSecurise by lazy {
+        retrofit.create(MapApiTarjetSecurise::class.java)
     }
 
 }

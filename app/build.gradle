@@ -53,7 +53,17 @@ dependencies {
     implementation('com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0') {
         exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-android-core'
     }
+    implementation "com.mapbox.navigation:android:2.17.4"
+    implementation 'com.mapbox.navigation:core:2.17.4'
+    implementation "com.mapbox.navigation:ui-dropin:2.17.4"
 
+    // Mapbox Java SDK (includes services like Directions, Geocoding, and Map Matching)
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:6.14.0'
+
+
+
+
+    implementation 'com.mapbox.navigation:core:2.0.0'
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     // ViewModel utilities for Compose

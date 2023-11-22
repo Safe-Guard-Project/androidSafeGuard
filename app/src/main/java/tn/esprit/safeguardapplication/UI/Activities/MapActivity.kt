@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Paint
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -31,7 +30,6 @@ import com.mapbox.geojson.Polygon
 import com.mapbox.mapboxsdk.plugins.annotation.CircleManager
 import com.mapbox.maps.CameraOptions
 import com.mapbox.maps.MapView
-import com.mapbox.maps.MapboxMap
 import com.mapbox.maps.Style
 import com.mapbox.maps.extension.style.expressions.dsl.generated.interpolate
 import com.mapbox.maps.extension.style.layers.addLayer
@@ -65,11 +63,13 @@ import com.mapbox.search.ui.view.SearchResultsView
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.databinding.ActivityMapBinding
 import tn.esprit.safeguardapplication.util.LocationPermissionHelper
+import tn.esprit.safeguardapplication.viewmodels.TrajetSecuriseViewModel
 import tn.esprit.safeguardapplication.viewmodels.ZoneDeDangerViewModel
 import java.lang.ref.WeakReference
 import kotlin.math.PI
 import kotlin.math.cos
 import kotlin.math.sin
+
 class MapActivity() : AppCompatActivity() {
 
     private lateinit var locationPermissionHelper: LocationPermissionHelper
@@ -99,15 +99,26 @@ class MapActivity() : AppCompatActivity() {
     private lateinit var binding: ActivityMapBinding
 
     private lateinit var zoneDeDangerViewModel: ZoneDeDangerViewModel
+    private lateinit var trajetSecuriseViewModel: TrajetSecuriseViewModel
 
     private lateinit var searchEngine: SearchEngine
     private lateinit var circleManager: CircleManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mapView = binding.mapView
 
+        trajetSecuriseViewModel = ViewModelProvider(this).get(TrajetSecuriseViewModel::class.java)
+        trajetSecuriseViewModel.getTrajetSecurise().observe(this, { trajetSecuriseList ->
+            if (trajetSecuriseList != null && trajetSecuriseList.isNotEmpty()) {
+                val useRedIcon = trajetSecuriseList.any { it.etat } // Check the etat value
+                updateLocationPuckIcon(useRedIcon)
+            } else {
+                Log.e(TAG, "Error getting TrajetSecurise or list is empty")
+            }
+        })
 
 
 
@@ -115,7 +126,8 @@ class MapActivity() : AppCompatActivity() {
             Style.MAPBOX_STREETS)
         locationPermissionHelper = LocationPermissionHelper(WeakReference(this))
         locationPermissionHelper.checkPermissions {
-            onMapReady(mapboxMap = mapView.getMapboxMap())
+            onMapReady(100.0,9.5607653,33.7931605)
+
         }
         searchEngine = SearchEngine.createSearchEngineWithBuiltInDataProviders(
             SearchEngineSettings(getString(R.string.mapbox_access_token))
@@ -302,41 +314,17 @@ class MapActivity() : AppCompatActivity() {
         }
     }
 
-    private fun onMapReady(mapboxMap: MapboxMap) {
+    private fun onMapReady(
+        radiusInKilometerss: Double,
+        longitude:Double,
+        latitude:Double,
+
+    ) {
         mapView?.getMapboxMap()?.loadStyleUri(
             Style.MAPBOX_STREETS
         ) {
-            // Define the center of the circle
-            val circleCenter = Point.fromLngLat(33.7931605, 9.5607653)
-            val radiusInKilometerss = 100.0
 
-            val circlePoints = ArrayList<Point>()
-            val steps = 64
-            val distanceX = radiusInKilometerss / (111.32 * cos(Math.toRadians(circleCenter.latitude())))
-            val distanceY = radiusInKilometerss / 110.574
-
-            for (i in 0 until steps) {
-                val theta = 2.0 * PI * i / steps
-                val x = distanceX * cos(theta)
-                val y = distanceY * sin(theta)
-                circlePoints.add(Point.fromLngLat(circleCenter.longitude() + x, circleCenter.latitude() + y))
-            }
-
-            val polygon = Polygon.fromLngLats(listOf(circlePoints))
-            val featureCollection = FeatureCollection.fromFeature(Feature.fromGeometry(polygon))
-
-            val source = geoJsonSource("circle-source") {
-                data(featureCollection.toJson()) // Convert FeatureCollection to JSON string
-            }
-            it.addSource(source)
-
-            val circleLayer = fillLayer("circle-layer", "circle-source") {
-                fillColor("#ff0000") // Set the color of the circle
-                fillOpacity(0.5) // Set opacity as a Double value
-            }
-
-            it.addLayer(circleLayer)
-        
+            addCircleToMap(radiusInKilometerss,longitude,latitude,it)
 
 
             addAnnotationToMap()
@@ -363,18 +351,42 @@ class MapActivity() : AppCompatActivity() {
     }
 
 
+    private fun addCircleToMap(radiusInKilometerss : Double,longitude:Double,latitude :Double,it: Style){
+        // Define the center of the circle
+        val circleCenter = Point.fromLngLat(longitude, latitude)
 
-    // Function to create a bitmap with a circle
-    fun createCircleBitmap(radius: Int, color: Int): Bitmap {
-        val bitmap = Bitmap.createBitmap(radius * 2, radius * 2, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        val paint = Paint().apply {
-            this.color = color
-            isAntiAlias = true
+
+        val circlePoints = ArrayList<Point>()
+        val steps = 64
+        val distanceX = radiusInKilometerss / (111.32 * cos(Math.toRadians(circleCenter.latitude())))
+        val distanceY = radiusInKilometerss / 110.574
+
+        for (i in 0 until steps) {
+            val theta = 2.0 * PI * i / steps
+            val x = distanceX * cos(theta)
+            val y = distanceY * sin(theta)
+            circlePoints.add(Point.fromLngLat(circleCenter.longitude() + x, circleCenter.latitude() + y))
         }
-        canvas.drawCircle(radius.toFloat(), radius.toFloat(), radius.toFloat(), paint)
-        return bitmap
+
+        val polygon = Polygon.fromLngLats(listOf(circlePoints))
+        val featureCollection = FeatureCollection.fromFeature(Feature.fromGeometry(polygon))
+
+        val source = geoJsonSource("circle-source") {
+            data(featureCollection.toJson()) // Convert FeatureCollection to JSON string
+        }
+        it.addSource(source)
+
+        val circleLayer = fillLayer("circle-layer", "circle-source") {
+            fillColor("#ff0000") // Set the color of the circle
+            fillOpacity(0.5) // Set opacity as a Double value
+        }
+
+        it.addLayer(circleLayer)
+
+
+
     }
+
 
     private fun setupGesturesListener() {
         mapView.gestures.addOnMoveListener(onMoveListener)
@@ -435,6 +447,16 @@ class MapActivity() : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         locationPermissionHelper.onRequestPermissionsResult(requestCode, permissions, grantResults)
+    }
+    private fun updateLocationPuckIcon(useRedIcon: Boolean) {
+        val iconResId = if (useRedIcon) R.drawable.baseline_location_on_red else R.drawable.baseline_location_on_24
+        mapView.location.updateSettings {
+            this.locationPuck = LocationPuck2D(
+                bearingImage = AppCompatResources.getDrawable(this@MapActivity, iconResId),
+                shadowImage = AppCompatResources.getDrawable(this@MapActivity, iconResId),
+                // ... other settings
+            )
+        }
     }
 
     override fun onStart() {
