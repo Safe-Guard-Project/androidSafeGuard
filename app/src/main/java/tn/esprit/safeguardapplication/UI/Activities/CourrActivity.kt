@@ -18,7 +18,9 @@ import kotlinx.coroutines.launch
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.databinding.ActivityCourrBinding
 import tn.esprit.safeguardapplication.models.Commentaire
+import tn.esprit.safeguardapplication.models.Cours
 import tn.esprit.safeguardapplication.viewmodels.CommentaireViewModel
+import tn.esprit.safeguardapplication.viewmodels.FeedViewModel
 
 
 class CourrActivity : AppCompatActivity() {
@@ -26,6 +28,8 @@ class CourrActivity : AppCompatActivity() {
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityCourrBinding
     private lateinit var viewModel: CommentaireViewModel
+    private lateinit var viewModell: FeedViewModel
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +39,8 @@ class CourrActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarCourr.toolbar)
+        // Replace with the actual way you get the Cours object
+
 
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
@@ -52,9 +58,17 @@ class CourrActivity : AppCompatActivity() {
 
 
         viewModel = ViewModelProvider(this).get(CommentaireViewModel::class.java)
+        ///////modifier cm
+        val  commentaireId = intent.getStringExtra("commentaireId")
+        if(!commentaireId.isNullOrEmpty()){
+            binding.idcmm.setText(intent.getStringExtra("commentaireText"))
+        }
+       // val  commentaireText = intent.getStringExtra("commentaireText")
 
 
+/////post Comment
         binding.buttonSend.setOnClickListener(){
+           
             val commentaire = Commentaire(
                 _id = "id comment",
                 textComment = binding.idcmm.text.toString() ,

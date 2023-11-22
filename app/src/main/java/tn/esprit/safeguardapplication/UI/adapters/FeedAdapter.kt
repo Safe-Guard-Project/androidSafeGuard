@@ -10,12 +10,19 @@ import tn.esprit.safeguardapplication.models.Commentaire
 
 class FeedAdapter: RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
     private var onDeleteClick: ((position: Int) -> Unit)? = null
+    private var onEditClickListener: ((position: Int) -> Unit)? = null
     fun setOnDeleteClick(listener: (position: Int) -> Unit) {
         onDeleteClick = listener
     }
 
     fun deleteOnceRess(position: Int) {
         onDeleteClick?.invoke(position)
+    }
+    fun setOnEditClickListener(listener: (position: Int) -> Unit) {
+        onEditClickListener = listener
+    }
+    fun editcomment(position: Int) {
+        onEditClickListener?.invoke(position)
     }
 
     private val diffCallback = object : DiffUtil.ItemCallback<Commentaire>() {
@@ -48,6 +55,10 @@ class FeedAdapter: RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
             val commentaire = commentaire[position]
             textfeedbk.text = commentaire.textComment
             buttonSupp.setOnClickListener { deleteOnceRess(holder.absoluteAdapterPosition) }
+            buttonModif.setOnClickListener {
+
+                editcomment(holder.adapterPosition)
+            }
 
         }
     }

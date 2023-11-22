@@ -29,6 +29,7 @@ object RetrofitImpl {
     val commentApi: CommentApi by lazy {
         retrofit.create(CommentApi::class.java)
     }
+
     val favApi: FavApi by lazy {
         retrofit.create(FavApi::class.java)
     }

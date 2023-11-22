@@ -8,6 +8,7 @@ import kotlinx.coroutines.Dispatchers
 import okhttp3.ResponseBody
 import retrofit2.Response
 import tn.esprit.safeguardapplication.Api.RetrofitImpl
+import tn.esprit.safeguardapplication.models.Commentaire
 
 class FeedViewModel : ViewModel(){
     fun getComment() = liveData(Dispatchers.IO) {
@@ -26,7 +27,12 @@ class FeedViewModel : ViewModel(){
             Log.e(ContentValues.TAG, "Exception: ${e.message}")
             return null
         }
-    }/*
+    }
+
+    suspend fun UpdateC(id: String, commentaire: Commentaire): Response<Commentaire>{
+        return RetrofitImpl.feedBApi.UpdateC(id,commentaire)
+    }
+/*
     suspend fun deleteOnceComment(commentId: String): Response<> {
         // Implémentation de la suppression du commentaire ici
     }*/
