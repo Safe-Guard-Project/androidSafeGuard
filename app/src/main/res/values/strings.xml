@@ -33,4 +33,5 @@
     <string name="txt_forgot_password">Forgot Password</string>
     <string name="change_it">change it now</string>
     <string name="signup">SignUp</string>
+    <string name="mapbox_access_token">sk.eyJ1Ijoib3Vzc2FtYWJvdXJpZ2EiLCJhIjoiY2xwNWl1dXk5MWozZzJycXl6enR5MzBmeSJ9.KZvaArDJOGDDkVG4Sx4egA</string>
 </resources>

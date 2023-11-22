@@ -7,6 +7,7 @@ plugins {
 android {
     namespace 'tn.esprit.safeguardapplication'
     compileSdk 34
+    ndkVersion "21.4.7075529"
 
     defaultConfig {
         applicationId "tn.esprit.safeguardapplication"
@@ -35,21 +36,44 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
     buildFeatures{
         viewBinding = true
     }
 }
 
+
+
 dependencies {
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    implementation("com.google.android.gms:play-services-basement:18.2.0")
-    implementation 'com.auth0.android:jwtdecode:2.0.2'
+    // mapBox 
+    implementation 'com.mapbox.maps:android:10.16.1'
+
+    implementation("com.google.android.gms:play-services-location:21.0.1")
+
+    implementation "com.mapbox.search:autofill:1.0.0-rc.6"
+    implementation "com.mapbox.search:discover:1.0.0-rc.6"
+    implementation "com.mapbox.search:place-autocomplete:1.0.0-rc.6"
+    implementation "com.mapbox.search:offline:1.0.0-rc.6"
+    implementation "com.mapbox.search:mapbox-search-android:1.0.0-rc.6"
+    implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-rc.6"
+
+
+    implementation('com.mapbox.mapboxsdk:mapbox-android-plugin-annotation-v9:0.9.0') {
+        exclude group: 'com.mapbox.mapboxsdk', module: 'mapbox-android-core'
+    }
+    implementation "com.mapbox.navigation:android:2.17.4"
+    implementation 'com.mapbox.navigation:core:2.17.4'
+    implementation "com.mapbox.navigation:ui-dropin:2.17.4"
+
+    // Mapbox Java SDK (includes services like Directions, Geocoding, and Map Matching)
+    implementation 'com.mapbox.mapboxsdk:mapbox-sdk-services:6.14.0'
 
     implementation 'androidx.appcompat:appcompat:1.4.0'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
 
+    implementation 'com.mapbox.navigation:core:2.0.0'
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1")
     // ViewModel utilities for Compose
@@ -58,8 +82,12 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.5.1")
 
     implementation("androidx.room:room-runtime:2.5.0")
+
     implementation 'com.google.firebase:firebase-messaging:23.3.1'
+
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+
     annotationProcessor("androidx.room:room-compiler:2.5.0")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
@@ -93,4 +121,10 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
     implementation 'com.google.android.material:material:1.5.0'
+
+    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
+    implementation("com.google.android.gms:play-services-basement:18.2.0")
+    implementation 'com.auth0.android:jwtdecode:2.0.2'
+
+
 }

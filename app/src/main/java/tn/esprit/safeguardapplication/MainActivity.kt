@@ -1,5 +1,6 @@
 package tn.esprit.safeguardapplication
 
+
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.content.Intent
@@ -14,33 +15,47 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.coroutines.launch
-import tn.esprit.safeguardapplication.UI.adapters.CatastropheAdapter
-import tn.esprit.safeguardapplication.databinding.ActivityCatastropheBinding
-import tn.esprit.t1.viewmodel.CatastropheViewModel
-
+import android.view.View
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import tn.esprit.safeguardapplication.UI.Activities.MapActivity
+import tn.esprit.safeguardapplication.databinding.ActivityMainBinding
+import tn.esprit.safeguardapplication.util.LocationHelper
 
 const val TAGI = "Main Activity"
 
 class MainActivity : ComponentActivity() {
-
-    private lateinit var catastropheAdapter: CatastropheAdapter
-    private lateinit var binding: ActivityCatastropheBinding
-    private lateinit var viewModel: CatastropheViewModel
+    private lateinit var binding : ActivityMainBinding
+    private lateinit var locationHelper: LocationHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
 
-        binding = ActivityCatastropheBinding.inflate(layoutInflater)
+        binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(CatastropheViewModel::class.java)
+        locationHelper = LocationHelper(this)
+        locationHelper.onLocationUpdated = { latitude, longitude ->
+            Log.e("Location", "Latitude: $latitude ; Longitude: $longitude")
+        }
 
-        setupRecyclerView()
-        observeViewModel()
+        val mapImageView = findViewById<ImageView>(R.id.nav_map)
+        val homeImageView = findViewById<ImageView>(R.id.nav_home)
+        mapImageView.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+                val intent = Intent(this@MainActivity, MapActivity::class.java)
+                startActivity(intent)
+            }
+        })
+        homeImageView.setOnClickListener(object : View.OnClickListener {
+            override fun onClick(v: View) {
+                val intent = Intent(this@MainActivity, MainActivity::class.java)
+                startActivity(intent)
+            }
+        })
 
-        // Launch CatastropheActivity
-        launchCatastropheActivity()
-
+      
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 "channel_id",
@@ -60,31 +75,13 @@ class MainActivity : ComponentActivity() {
                 Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
             }
     }
-
-    private fun launchCatastropheActivity() {
-        val intent = Intent(this, CatastropheActivity::class.java)
-        startActivity(intent)
+   override fun onDestroy() {
+        super.onDestroy()
+        locationHelper.disableLocationUpdates()
     }
-
-    private fun observeViewModel() {
-        lifecycleScope.launch {
-            binding.progressBar.isVisible = true
-
-            viewModel.getCatastrophes().observe(this@MainActivity, { catastrophes ->
-                binding.progressBar.isVisible = false
-
-                if (catastrophes != null) {
-                    catastropheAdapter.catastrophes = catastrophes
-                } else {
-                    Log.e(TAGI, "Error retrieving catastrophes")
-                }
-            })
-        }
-    }
-
-    private fun setupRecyclerView() = binding.rvCatastrophe.apply {
-        catastropheAdapter = CatastropheAdapter()
-        adapter = catastropheAdapter
-        layoutManager = LinearLayoutManager(this@MainActivity)
-    }
+  
 }
+
+
+
+
