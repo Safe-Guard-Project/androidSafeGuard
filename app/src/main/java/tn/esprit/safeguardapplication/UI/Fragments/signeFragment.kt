@@ -15,7 +15,6 @@ import kotlinx.coroutines.withContext
 import tn.esprit.safeguardapplication.Api.RetrofitImpl
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.UI.adapters.CoursAdapter
-import tn.esprit.safeguardapplication.databinding.FragmentCauseBinding
 import tn.esprit.safeguardapplication.databinding.FragmentSigneBinding
 
 // TODO: Rename parameter arguments, choose names that match

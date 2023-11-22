@@ -36,7 +36,7 @@
                 android:layout_width="375dp"
                 android:layout_height="175dp"
                 android:layout_marginTop="16dp"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.466"
@@ -51,7 +51,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="10dp"
                 android:text="TextView"
-                android:textSize="16dp"
+                android:textSize="20dp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

@@ -59,11 +59,11 @@
                 android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="45dp"
 
-                android:layout_marginEnd="175dp"
-                android:text="Plus de détails"
+
+                android:text="C'est quoi ce phénoméne"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/favBtnV"
@@ -79,6 +79,7 @@
                 android:layout_marginRight="10dp"
                 android:text="Un tsunami est un phénomène naturel dévastateur caractérisé par une série d'ondes océaniques de grande amplitude, généralement déclenchées par un déplacement massif de l'eau causé par des événements tels que des tremblements de terre sous-marins, des éruptions volcaniques, des glissements de terrain sous-marins ou, plus rarement, des impacts de météorites dans l'océan. Ces ondes, souvent appelées"
                 android:textSize="20dp"
+                android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView7" />

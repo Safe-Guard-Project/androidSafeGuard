@@ -8,16 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.bumptech.glide.Glide
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import tn.esprit.safeguardapplication.Api.RetrofitImpl
 import tn.esprit.safeguardapplication.R
-import tn.esprit.safeguardapplication.databinding.ActivityProgrammeBinding
 import tn.esprit.safeguardapplication.databinding.FragmentIntroBinding
+import tn.esprit.safeguardapplication.models.Cours
 import tn.esprit.safeguardapplication.models.Favori
-import tn.esprit.safeguardapplication.viewmodels.CommentaireViewModel
 import tn.esprit.safeguardapplication.viewmodels.FavoriViewModel
 
 // TODO: Rename parameter arguments, choose names that match
@@ -80,6 +80,22 @@ class introFragment : Fragment() {
                 if (introductionList != null) {
                     withContext(Dispatchers.Main) {
                         binding.textView5.text = introductionList[0].description
+                        CoroutineScope(Dispatchers.IO).launch {
+                            try {
+                                val introductionList = RetrofitImpl.api.getIntro()
+
+                                if (introductionList != null) {
+                                    withContext(Dispatchers.Main) {
+                                        binding.textView5.text = introductionList[0].description
+                                        Glide.with(requireContext()).load("http://10.0.2.2:9090/" +introductionList[0].image).into(binding.imageDef)
+                                    }
+                                } else {
+                                }
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+
                     }
                 } else {
                 }
@@ -91,14 +107,12 @@ class introFragment : Fragment() {
 
     }
     private fun addToFavorites() {
-        // Tu devrais remplacer ces valeurs par celles que tu veux envoyer au backend
         val favori = Favori(
             _id = "id de fav",
-            idRessourceProgramme = "65590e31c34eba3a779aca70"
+            idCoursProgramme = "65590e31c34eba3a779aca70"
 
         )
 
-        // Utiliser le viewModel pour ajouter aux favoris
         viewModel.viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = viewModel.addFav(favori)

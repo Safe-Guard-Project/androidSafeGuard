@@ -9,6 +9,14 @@ import tn.esprit.safeguardapplication.databinding.RecyclerfeedBinding
 import tn.esprit.safeguardapplication.models.Commentaire
 
 class FeedAdapter: RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
+    private var onDeleteClick: ((position: Int) -> Unit)? = null
+    fun setOnDeleteClick(listener: (position: Int) -> Unit) {
+        onDeleteClick = listener
+    }
+
+    fun deleteOnceRess(position: Int) {
+        onDeleteClick?.invoke(position)
+    }
 
     private val diffCallback = object : DiffUtil.ItemCallback<Commentaire>() {
         override fun areContentsTheSame(oldItem: Commentaire, newItem: Commentaire): Boolean {
@@ -22,7 +30,7 @@ class FeedAdapter: RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
 
     private val differ = AsyncListDiffer(this, diffCallback)
 
-    var commentaire: List<Commentaire>
+    var commentaire: MutableList<Commentaire>
     get() = differ.currentList
     set(value) {
         differ.submitList(value)
@@ -38,8 +46,8 @@ class FeedAdapter: RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.apply {
             val commentaire = commentaire[position]
-
             textfeedbk.text = commentaire.textComment
+            buttonSupp.setOnClickListener { deleteOnceRess(holder.absoluteAdapterPosition) }
 
         }
     }
