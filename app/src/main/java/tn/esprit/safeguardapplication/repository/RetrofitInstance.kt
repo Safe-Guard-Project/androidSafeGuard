@@ -7,7 +7,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 import tn.esprit.safeguardapplication.Api.CatastropheApi
 
 object RetrofitInstance {
-    val api: CatastropheApi by lazy {
+
+    private const val BASE_URL = "http://192.168.1.105:9090/"
+
+    private val retrofit by lazy {
         val interceptor = HttpLoggingInterceptor()
         interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
@@ -16,10 +19,13 @@ object RetrofitInstance {
             .build()
 
         Retrofit.Builder()
-            .baseUrl("http://192.168.1.105:9090/")
+            .baseUrl(BASE_URL)
             .client(client)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(CatastropheApi::class.java)
+    }
+
+    val api: CatastropheApi by lazy {
+        retrofit.create(CatastropheApi::class.java)
     }
 }

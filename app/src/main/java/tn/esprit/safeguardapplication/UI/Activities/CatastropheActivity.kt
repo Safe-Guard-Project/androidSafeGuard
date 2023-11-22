@@ -3,21 +3,15 @@ package tn.esprit.safeguardapplication
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.gms.security.ProviderInstaller
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
 import tn.esprit.safeguardapplication.UI.adapters.CatastropheAdapter
 import tn.esprit.safeguardapplication.databinding.ActivityCatastropheBinding
-import tn.esprit.safeguardapplication.repository.RetrofitInstance
 import tn.esprit.t1.viewmodel.CatastropheViewModel
-import java.io.IOException
-import java.security.KeyManagementException
-import java.security.NoSuchAlgorithmException
-import javax.net.ssl.SSLContext
 
 const val TAG = "Catastrophe Activity"
 
@@ -36,6 +30,7 @@ class CatastropheActivity : ComponentActivity() {
         viewModel = ViewModelProvider(this).get(CatastropheViewModel::class.java)
 
         setupRecyclerView()
+        setupSearchView()
         observeViewModel()
     }
 
@@ -59,5 +54,20 @@ class CatastropheActivity : ComponentActivity() {
         catastropheAdapter = CatastropheAdapter()
         adapter = catastropheAdapter
         layoutManager = LinearLayoutManager(this@CatastropheActivity)
+    }
+
+    private fun setupSearchView() {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                // Clear focus when submit is pressed
+                binding.searchView.clearFocus()
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                catastropheAdapter.filter.filter(newText)
+                return false
+            }
+        })
     }
 }
