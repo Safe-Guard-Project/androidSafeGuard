@@ -9,10 +9,10 @@ import tn.esprit.safeguardapplication.models.User
 
 interface UserApiService {
 
-    @POST("loginClient")
+    @POST("user/loginClient")
     fun signIn(@Body requestBody: RequestBody): Call<User>
-    @POST("registerClient")
+    @POST("user/registerClient")
     fun signUp(@Body requestBody: RequestBody): Call<User>
-    @GET("profile/{id}")
+    @GET("user/profile/{id}")
     fun displayUserProfile(@Path("id") userId: String): Call<User>
  }

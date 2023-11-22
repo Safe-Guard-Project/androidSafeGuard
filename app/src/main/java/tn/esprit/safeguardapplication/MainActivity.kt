@@ -40,8 +40,15 @@ class MainActivity : ComponentActivity() {
             Log.e("Location", "Latitude: $latitude ; Longitude: $longitude")
         }
 
+
         val mapImageView = findViewById<ImageView>(R.id.nav_map)
         val homeImageView = findViewById<ImageView>(R.id.nav_home)
+
+        binding.seeAllAlerts.setOnClickListener {
+            val intent = Intent(this@MainActivity, CatastropheActivity::class.java)
+            startActivity(intent)
+        }
+
         mapImageView.setOnClickListener(object : View.OnClickListener {
             override fun onClick(v: View) {
                 val intent = Intent(this@MainActivity, MapActivity::class.java)

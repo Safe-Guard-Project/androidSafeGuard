@@ -19,7 +19,7 @@ class DisplayUserProfileActivity : AppCompatActivity() {
     private lateinit var txtNumTel: TextView
 
     private val displayUserProfileViewModel: DisplayUserProfileViewModel by viewModels {
-        val userRepository: UserRepository = UserRepositoryImpl(RetrofitInstance.api)
+        val userRepository: UserRepository = UserRepositoryImpl(RetrofitInstance.apiUser)
 
         DisplayUserProfileViewModel.Factory(userRepository)
     }

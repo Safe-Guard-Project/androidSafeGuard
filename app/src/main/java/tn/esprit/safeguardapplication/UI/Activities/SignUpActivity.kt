@@ -32,7 +32,7 @@ class SignUpActivity : ComponentActivity() {
         }
 
         // Create an instance of the UserRepository implementation
-        val userRepository: UserRepository = UserRepositoryImpl(RetrofitInstance.api)
+        val userRepository: UserRepository = UserRepositoryImpl(RetrofitInstance.apiUser)
 
         // Create a SignUpViewModel.Factory with the UserRepository instance
         val signUpViewModelFactory = SignUpViewModel.Factory(userRepository)

@@ -1,37 +1,50 @@
 package tn.esprit.safeguardapplication.viewmodels
-
-import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.liveData
 import kotlinx.coroutines.Dispatchers
-import retrofit2.Response
+import kotlinx.coroutines.withContext
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import tn.esprit.safeguardapplication.models.User
 import tn.esprit.safeguardapplication.repository.UserRepository
 
+
+// SignInViewModel
 class SignInViewModel(private val userRepository: UserRepository) : ViewModel() {
 
-    companion object {
-        private const val TAG = "SignInViewModel"
-    }
 
-    fun signIn(email: String, password: String) = liveData(Dispatchers.IO) {
-        try {
-            // Call the signIn function in the repository
-            val response = userRepository.signIn(email, password)
+    private val _signInResult = MutableLiveData<User?>()
 
-            // Check if the response is successful
-            if (response != null) {
-                emit(response)
-            } else {
-                Log.e(TAG, "Unsuccessful response or null response")
-                // You might want to emit a specific error state or handle it accordingly
-                emit(null)
+
+    val signInResult: LiveData<User?>
+        get() = _signInResult
+
+
+    suspend fun signIn(email: String, password: String) {
+        val requestBody = RequestBody.create(
+            "application/json".toMediaTypeOrNull(),
+            "{\"email\":\"$email\", \"password\":\"$password\"}"
+        )
+
+
+        withContext(Dispatchers.IO) {
+            try {
+                val response = userRepository.signIn(email, password)
+                withContext(Dispatchers.Main) {
+                    _signInResult.postUserValue(response)
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _signInResult.postUserValue(null)
+                }
             }
-        } catch (e: Exception) {
-            Log.e(TAG, "Exception: ${e.message}")
-            emit(null)
         }
     }
+
+
+
 
     // Factory to create instances of SignInViewModel
     class Factory(private val userRepository: UserRepository) : ViewModelProvider.Factory {
@@ -43,4 +56,15 @@ class SignInViewModel(private val userRepository: UserRepository) : ViewModel() 
             throw IllegalArgumentException("Unknown ViewModel class")
         }
     }
+}
+
+
+fun MutableLiveData<User?>.postUserValue(response: MutableLiveData<User?>?) {
+    this.postValue(response)
+}
+
+
+private fun <T> MutableLiveData<T>.postValue(response: MutableLiveData<User?>?) {
+
+
 }
