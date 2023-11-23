@@ -2,6 +2,7 @@ package tn.esprit.safeguardapplication.viewmodels
 
 
 import android.content.ContentValues
+import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
@@ -24,4 +25,23 @@ class TrajetSecuriseViewModel : ViewModel() {
         }
     }
 
+    fun getTrajetSecuriseByIdUser(userId: String) = liveData(Dispatchers.IO) {
+        try {
+            val response = RetrofitInstance.apiTarjetSecurise.getTrajetSecuriseByIdUser(userId)
+            emit(response.body())
+        } catch (e: Exception) {
+            Log.e(TAG, "Exception: ${e.message}")
+            emit(null)
+        }
+    }
+
+    fun changeEtatToFalseWithIdUser(userId: String) = liveData(Dispatchers.IO) {
+        try {
+            val response = RetrofitInstance.apiTarjetSecurise.changeEtatToFalseWithIdUser(userId)
+            emit(response.isSuccessful)
+        } catch (e: Exception) {
+            Log.e(TAG, "Exception: ${e.message}")
+            emit(false)
+        }
+    }
 }
