@@ -10,7 +10,9 @@ import tn.esprit.safeguardapplication.Api.UserApiService
 import tn.esprit.safeguardapplication.Api.ZoneDeDangerApi
 object RetrofitInstance {
 
+
     private const val BASE_URL = "http://192.168.1.105:9090/"
+
 
    
     

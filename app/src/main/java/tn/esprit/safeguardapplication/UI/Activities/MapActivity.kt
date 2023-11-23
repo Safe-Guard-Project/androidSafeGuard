@@ -21,6 +21,8 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.mapbox.android.gestures.MoveGestureDetector
 import com.mapbox.geojson.Feature
@@ -62,9 +64,11 @@ import com.mapbox.search.ui.view.DistanceUnitType
 import com.mapbox.search.ui.view.SearchResultsView
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.databinding.ActivityMapBinding
+import tn.esprit.safeguardapplication.models.Catastrophe
 import tn.esprit.safeguardapplication.util.LocationPermissionHelper
 import tn.esprit.safeguardapplication.viewmodels.TrajetSecuriseViewModel
 import tn.esprit.safeguardapplication.viewmodels.ZoneDeDangerViewModel
+import tn.esprit.t1.viewmodel.CatastropheViewModel
 import java.lang.ref.WeakReference
 import kotlin.math.PI
 import kotlin.math.cos
@@ -104,6 +108,12 @@ class MapActivity() : AppCompatActivity() {
     private lateinit var searchEngine: SearchEngine
     private lateinit var circleManager: CircleManager
 
+    private lateinit var viewModelCatastrophe: CatastropheViewModel
+    private var catastrophes: List<Catastrophe>? = null
+    private var mapStyleLoaded = false
+    private var currentMapStyle: Style? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMapBinding.inflate(layoutInflater)
@@ -119,15 +129,23 @@ class MapActivity() : AppCompatActivity() {
                 Log.e(TAG, "Error getting TrajetSecurise or list is empty")
             }
         })
-
-
+        viewModelCatastrophe = ViewModelProvider(this).get(CatastropheViewModel::class.java)
+        viewModelCatastrophe.getCatastrophes().observe(this, Observer { catastrophesList ->
+            catastrophes = catastrophesList
+            Log.e(TAG, "catastrophes List $catastrophesList")
+            if (mapStyleLoaded) {
+                addCatastropheCircles()
+            }
+        })
 
         mapView?.getMapboxMap()?.loadStyleUri(
             Style.MAPBOX_STREETS)
         locationPermissionHelper = LocationPermissionHelper(WeakReference(this))
-        locationPermissionHelper.checkPermissions {
-            onMapReady(100.0,9.5607653,33.7931605)
 
+
+
+        locationPermissionHelper.checkPermissions {
+            onMapReady()
         }
         searchEngine = SearchEngine.createSearchEngineWithBuiltInDataProviders(
             SearchEngineSettings(getString(R.string.mapbox_access_token))
@@ -262,6 +280,8 @@ class MapActivity() : AppCompatActivity() {
 
     }
 
+
+
     private fun addAnnotationToMap() {
 // Create an instance of the Annotation API and get the PointAnnotationManager.
         bitmapFromDrawableRes(
@@ -314,17 +334,23 @@ class MapActivity() : AppCompatActivity() {
         }
     }
 
-    private fun onMapReady(
-        radiusInKilometerss: Double,
-        longitude:Double,
-        latitude:Double,
-
-    ) {
+    private fun onMapReady() {
         mapView?.getMapboxMap()?.loadStyleUri(
             Style.MAPBOX_STREETS
-        ) {
+        ) {style ->
+            currentMapStyle = style
+            mapStyleLoaded = true
+            viewModelCatastrophe.getCatastrophes().observe(this, Observer { catastrophesList ->
+                catastrophes = catastrophesList
+                if (catastrophesList != null) {
+                    Log.e(TAG, "Number of catastrophes received: ${catastrophesList.size}")
+                }
+                if (mapStyleLoaded) {
+                    addCatastropheCircles()
+                }
+            })
 
-            addCircleToMap(radiusInKilometerss,longitude,latitude,it)
+
 
 
             addAnnotationToMap()
@@ -350,12 +376,18 @@ class MapActivity() : AppCompatActivity() {
         findViewById<SearchResultsView>(R.id.search_results_view).visibility = visibility
     }
 
+    private fun addCatastropheCircles() {
+        catastrophes?.forEach { catastrophe ->
+            currentMapStyle?.let { style ->
+                addCircleToMap(catastrophe.radius, catastrophe.longitudeDeCatastrophe, catastrophe.latitudeDeCatastrophe, style)
+            }
+        }
+    }
 
-    private fun addCircleToMap(radiusInKilometerss : Double,longitude:Double,latitude :Double,it: Style){
-        // Define the center of the circle
+
+    private fun addCircleToMap(radiusInKilometerss: Double, longitude: Double, latitude: Double, style: Style) {
+        val uniqueId = "circle-source-${latitude}-${longitude}-${radiusInKilometerss}"
         val circleCenter = Point.fromLngLat(longitude, latitude)
-
-
         val circlePoints = ArrayList<Point>()
         val steps = 64
         val distanceX = radiusInKilometerss / (111.32 * cos(Math.toRadians(circleCenter.latitude())))
@@ -371,22 +403,17 @@ class MapActivity() : AppCompatActivity() {
         val polygon = Polygon.fromLngLats(listOf(circlePoints))
         val featureCollection = FeatureCollection.fromFeature(Feature.fromGeometry(polygon))
 
-        val source = geoJsonSource("circle-source") {
-            data(featureCollection.toJson()) // Convert FeatureCollection to JSON string
+        val source = geoJsonSource(uniqueId) {
+            data(featureCollection.toJson())
         }
-        it.addSource(source)
+        style.addSource(source)
 
-        val circleLayer = fillLayer("circle-layer", "circle-source") {
-            fillColor("#ff0000") // Set the color of the circle
-            fillOpacity(0.5) // Set opacity as a Double value
+        val circleLayer = fillLayer("circle-layer-$uniqueId", uniqueId) {
+            fillColor("#ff0000")
+            fillOpacity(0.5)
         }
-
-        it.addLayer(circleLayer)
-
-
-
+        style.addLayer(circleLayer)
     }
-
 
     private fun setupGesturesListener() {
         mapView.gestures.addOnMoveListener(onMoveListener)
