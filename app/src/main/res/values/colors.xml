@@ -22,4 +22,10 @@
 
 
     <color name="gray">#E3E6F0</color>
+
+    <color name="blueClaire">#F2F5FF</color>
+ 
+    <color name="blue">#0047FF</color>
+    <color name="blueC">#BFCDEF</color>
+
 </resources>

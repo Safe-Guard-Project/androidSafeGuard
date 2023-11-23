@@ -9,6 +9,7 @@
 
     <application
         android:allowBackup="true"
+        android:allowClearUserData="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
         android:icon="@mipmap/ic_launcher"
@@ -47,6 +48,20 @@
             android:exported="true" />
 
         <activity
+            android:name=".UI.Activities.ui.Listfav"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activities.ui.FeedBack"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activities.ui.ProgrammeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".UI.Activities.CourrActivity"
+            android:exported="false"
+            android:label="@string/title_activity_courr"
+            android:theme="@style/Theme.SafeGuardApplication.NoActionBar" />
+        <activity
             android:name=".UI.Activities.SplashScreen"
             android:exported="true">
             <intent-filter>
@@ -71,7 +86,6 @@
         </service>
           
        
-
 
     </application>
 

@@ -22,6 +22,12 @@ import tn.esprit.safeguardapplication.UI.Activities.MapActivity
 import tn.esprit.safeguardapplication.databinding.ActivityMainBinding
 import tn.esprit.safeguardapplication.util.LocationHelper
 
+import tn.esprit.safeguardapplication.UI.Activities.ui.FeedBack
+import tn.esprit.safeguardapplication.UI.Fragments.ProgrammeFragment
+
+import tn.esprit.safeguardapplication.databinding.FragmentProgrammeBinding
+
+
 const val TAGI = "Main Activity"
 
 class MainActivity : ComponentActivity() {
@@ -34,6 +40,15 @@ class MainActivity : ComponentActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        
+         val progFragment=ProgrammeFragment()
+        binding.buttonProg.setOnClickListener() {
+            supportFragmentManager.beginTransaction().replace(R.id.container , progFragment).commit()
+        }
+        binding.buttonFeedback.setOnClickListener() {
+            val intent = Intent(this, FeedBack::class.java)
+            startActivity(intent)
+        }
 
         locationHelper = LocationHelper(this)
         locationHelper.onLocationUpdated = { latitude, longitude ->
@@ -81,12 +96,15 @@ class MainActivity : ComponentActivity() {
                 }
                 Toast.makeText(this@MainActivity, msg, Toast.LENGTH_SHORT).show()
             }
+
+
     }
    override fun onDestroy() {
         super.onDestroy()
         locationHelper.disableLocationUpdates()
     }
   
+
 }
 
 

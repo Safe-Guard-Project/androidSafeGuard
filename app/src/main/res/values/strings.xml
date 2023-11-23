@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SafeGuardApplication</string>
 
+
     <string name="EnterFullName">Enter your full name</string>
     <string name="EnterPPass">Enter your prefered password</string>
 
@@ -34,4 +35,21 @@
     <string name="change_it">change it now</string>
     <string name="signup">SignUp</string>
     <string name="mapbox_access_token">sk.eyJ1Ijoib3Vzc2FtYWJvdXJpZ2EiLCJhIjoiY2xwNWl1dXk5MWozZzJycXl6enR5MzBmeSJ9.KZvaArDJOGDDkVG4Sx4egA</string>
+    <string name="title_activity_courr">CourrActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_Introduction">Introduction</string>
+    <string name="menu_Cause">Causes</string>
+    <string name="menu_Consequence">Conséquences</string>
+    <string name="menu_Signes">Signes de catastrophe </string>
+    <string name="menu_Agir">Mesures Préventives</string>
+    <string name="menu_Quiz">Quiz</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
