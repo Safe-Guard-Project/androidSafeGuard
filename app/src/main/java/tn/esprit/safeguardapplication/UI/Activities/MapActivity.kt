@@ -65,6 +65,7 @@ import com.mapbox.search.ui.view.SearchResultsView
 import tn.esprit.safeguardapplication.R
 import tn.esprit.safeguardapplication.databinding.ActivityMapBinding
 import tn.esprit.safeguardapplication.models.Catastrophe
+import tn.esprit.safeguardapplication.models.ZoneDeDanger
 import tn.esprit.safeguardapplication.util.LocationPermissionHelper
 import tn.esprit.safeguardapplication.viewmodels.TrajetSecuriseViewModel
 import tn.esprit.safeguardapplication.viewmodels.ZoneDeDangerViewModel
@@ -112,6 +113,7 @@ class MapActivity() : AppCompatActivity() {
     private var catastrophes: List<Catastrophe>? = null
     private var mapStyleLoaded = false
     private var currentMapStyle: Style? = null
+    private var isMapReady = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -119,6 +121,8 @@ class MapActivity() : AppCompatActivity() {
         binding = ActivityMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mapView = binding.mapView
+        // In onCreate method of MapActivity
+
 
         trajetSecuriseViewModel = ViewModelProvider(this).get(TrajetSecuriseViewModel::class.java)
         trajetSecuriseViewModel.getTrajetSecurise().observe(this, { trajetSecuriseList ->
@@ -129,6 +133,9 @@ class MapActivity() : AppCompatActivity() {
                 Log.e(TAG, "Error getting TrajetSecurise or list is empty")
             }
         })
+
+
+
         viewModelCatastrophe = ViewModelProvider(this).get(CatastropheViewModel::class.java)
         viewModelCatastrophe.getCatastrophes().observe(this, Observer { catastrophesList ->
             catastrophes = catastrophesList
@@ -267,26 +274,48 @@ class MapActivity() : AppCompatActivity() {
 
         zoneDeDangerViewModel = ViewModelProvider(this).get(ZoneDeDangerViewModel::class.java)
 
-        zoneDeDangerViewModel.getZoneDeDanger().observe(this, { zoneDeDanger ->
-            if (zoneDeDanger != null) {
-                Log.d(TAG, " aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa  ZoneDeDanger: $zoneDeDanger")
+        zoneDeDangerViewModel.getZoneDeDanger().observe(this, { zoneDeDangerList ->
+            if (zoneDeDangerList != null) {
+                addZoneDeDangerAnnotations(zoneDeDangerList)
             } else {
                 Log.e(TAG, "Error getting ZoneDeDanger")
             }
-
         })
 
 
+        trajetSecuriseViewModel = ViewModelProvider(this).get(TrajetSecuriseViewModel::class.java)
+
+        val userId = "655da19a4bafdb060837a8ec" // Replace with actual user ID
+        trajetSecuriseViewModel.getTrajetSecuriseByIdUser(userId).observe(this, { trajetSecurise ->
+            if (trajetSecurise != null && trajetSecurise.etat) {
+                binding.etatChangeBtn.visibility = View.VISIBLE
+                setupButtonClickListener(userId)
+            } else {
+                binding.etatChangeBtn.visibility = View.GONE
+            }
+        })
 
     }
 
+    private fun setupButtonClickListener(userId: String) {
+        binding.etatChangeBtn.setOnClickListener {
+            trajetSecuriseViewModel.changeEtatToFalseWithIdUser(userId).observe(this, { success ->
+                if (success) {
+                    Toast.makeText(this, "Etat changed to false successfully", Toast.LENGTH_SHORT).show()
+                    binding.etatChangeBtn.visibility = View.GONE
+                } else {
+                    Toast.makeText(this, "Failed to change etat", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+    }
 
 
     private fun addAnnotationToMap() {
 // Create an instance of the Annotation API and get the PointAnnotationManager.
         bitmapFromDrawableRes(
             this@MapActivity,
-            R.drawable.red_marker
+            R.drawable.baseline_dangerous
         )?.let {
             val annotationApi = mapView?.annotations
             val pointAnnotationManager = annotationApi?.createPointAnnotationManager(mapView!!)
@@ -351,7 +380,8 @@ class MapActivity() : AppCompatActivity() {
             })
 
 
-
+            isMapReady = true
+            loadZoneDeDangerData()
 
             addAnnotationToMap()
             initLocationComponent()
@@ -367,6 +397,40 @@ class MapActivity() : AppCompatActivity() {
                         .zoom(1.0)
                         .build()
                 )
+            }
+        }
+    }
+    private fun loadZoneDeDangerData() {
+        if (isMapReady) {
+            zoneDeDangerViewModel.getZoneDeDanger().observe(this, { zoneDeDangerList ->
+                if (zoneDeDangerList != null) {
+                    // Log the count of ZoneDeDanger items received
+                    Log.d(TAG, "Received ${zoneDeDangerList.size} ZoneDeDanger items from backend")
+
+                    addZoneDeDangerAnnotations(zoneDeDangerList)
+                } else {
+                    Log.e(TAG, "Error getting ZoneDeDanger")
+                }
+            })
+        } else {
+            Log.e(TAG, "Map is not ready")
+        }
+    }
+
+
+    private fun addZoneDeDangerAnnotations(zoneDeDangerList: List<ZoneDeDanger>) {
+        val annotationApi = mapView?.annotations
+        val pointAnnotationManager = annotationApi?.createPointAnnotationManager(mapView!!)
+
+        zoneDeDangerList.forEach { zoneDeDanger ->
+            bitmapFromDrawableRes(this@MapActivity, R.drawable.baseline_dangerous)?.let { bitmap ->
+                val pointAnnotationOptions: PointAnnotationOptions = PointAnnotationOptions()
+                    .withPoint(Point.fromLngLat(zoneDeDanger.longitudeDeZoneDanger.toDouble(), zoneDeDanger.latitudeDeZoneDanger.toDouble()))
+                    .withIconImage(bitmap)
+                    .withIconSize(1.0) // Use Float value here
+
+                pointAnnotationManager?.create(pointAnnotationOptions)
+                Log.e(TAG, "ZoneDeDanger added to map")
             }
         }
     }

@@ -13,6 +13,14 @@ object RetrofitInstance {
     private const val BASE_URL = "http://192.168.1.103:9090/"
 >>>>>>> Stashed changes
 
+<<<<<<< Updated upstream
+=======
+    private const val BASE_URL = "http://192.168.1.103:9090/"
+
+
+   
+    
+>>>>>>> Stashed changes
     private val retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
