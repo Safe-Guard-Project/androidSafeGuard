@@ -63,7 +63,7 @@
                 android:layout_marginTop="45dp"
 
 
-                android:text="C'est quoi ce phénoméne"
+                android:text="C'est quoi ce phénoméne!!"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/favBtnV"

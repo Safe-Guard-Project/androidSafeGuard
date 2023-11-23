@@ -30,13 +30,13 @@ class ProgrammeFragment : Fragment() {
     private lateinit var viewModel: ProgrammeViewModel
 
 
-   /* override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }*/
+    /* override fun onCreate(savedInstanceState: Bundle?) {
+         super.onCreate(savedInstanceState)
+         arguments?.let {
+             param1 = it.getString(ARG_PARAM1)
+             param2 = it.getString(ARG_PARAM2)
+         }
+     }*/
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,15 +52,17 @@ class ProgrammeFragment : Fragment() {
     }
     private fun observeViewModel() {
         lifecycleScope.launch {
-            binding.progressBar.isVisible= true
+            binding.progressBar.isVisible = true
 
-            viewModel.getProgrammesWithCours().observe(viewLifecycleOwner) { programmes ->
+            val liveData = viewModel.getProgrammesWithCours()
+
+            liveData.observe(viewLifecycleOwner) { programmes ->
                 binding.progressBar.isVisible = false
 
                 if (programmes != null) {
                     programmeAdapter.programmes = programmes
                 } else {
-                    Log.e(tn.esprit.safeguardapplication.UI.Fragments.TAG, "Error retrieving programmes")
+                    Log.e(TAG, "Error retrieving programmes")
                 }
             }
         }

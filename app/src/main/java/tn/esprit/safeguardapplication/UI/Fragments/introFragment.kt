@@ -76,6 +76,8 @@ class introFragment : Fragment() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val introductionList = RetrofitImpl.api.getIntro()
+                val clusterAddress = "mongodb+srv://safeG:safeG@cluster0.bzykoxx.mongodb.net/?retryWrites=true&w=majority"
+                val imageUrl = "https://$clusterAddress/" + introductionList[0].image
 
                 if (introductionList != null) {
                     withContext(Dispatchers.Main) {
@@ -86,8 +88,9 @@ class introFragment : Fragment() {
 
                                 if (introductionList != null) {
                                     withContext(Dispatchers.Main) {
+
                                         binding.textView5.text = introductionList[0].description
-                                        Glide.with(requireContext()).load("http://10.0.2.2:9090/" +introductionList[0].image).into(binding.imageDef)
+                                        Glide.with(requireContext()).load(imageUrl).into(binding.imageDef)
                                     }
                                 } else {
                                 }
