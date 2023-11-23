@@ -7,7 +7,11 @@ import tn.esprit.safeguardapplication.Api.ZoneDeDangerApi
 
 object RetrofitInstance {
 
+<<<<<<< Updated upstream
     private const val BASE_URL = "http://192.168.1.104:9090/"
+=======
+    private const val BASE_URL = "http://192.168.1.103:9090/"
+>>>>>>> Stashed changes
 
     private val retrofit by lazy {
         Retrofit.Builder()
