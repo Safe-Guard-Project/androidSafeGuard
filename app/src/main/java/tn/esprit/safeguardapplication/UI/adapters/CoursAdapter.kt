@@ -98,22 +98,19 @@ class CoursAdapter(private var contentList: List<Cours>) : RecyclerView.Adapter<
         private val imageView: ImageView = itemView.findViewById(R.id.imagecause)
 
         fun bind(content: Cours) {
-            val clusterAddress = "mongodb+srv://safeG:safeG@cluster0.bzykoxx.mongodb.net/?retryWrites=true&w=majority"
-            val imageUrl = "https://$clusterAddress/" + content.image
+            
             itemView.findViewById<TextView>(R.id.txtcause)?.text = content.description
             Glide.with(itemView.context)
-                .load(imageUrl)
+                .load(content.image)
                 .into(imageView)
         }
     }
     class ConsequenceViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imagecons)
         fun bind(content: Cours) {
-            val clusterAddress = "mongodb+srv://safeG:safeG@cluster0.bzykoxx.mongodb.net/?retryWrites=true&w=majority"
-            val imageUrl = "https://$clusterAddress/" + content.image
             itemView.findViewById<TextView>(R.id.txtcons)?.text = content.description
             Glide.with(itemView.context)
-                .load(imageUrl)
+                .load( content.image)
                 .into(imageView)
         }
     }
@@ -121,11 +118,9 @@ class CoursAdapter(private var contentList: List<Cours>) : RecyclerView.Adapter<
     class SigneViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imageView: ImageView = itemView.findViewById(R.id.imageSigne)
         fun bind(content: Cours) {
-            val clusterAddress = "mongodb+srv://safeG:safeG@cluster0.bzykoxx.mongodb.net/?retryWrites=true&w=majority"
-            val imageUrl = "https://$clusterAddress/" + content.image
             itemView.findViewById<TextView>(R.id.txtSigne)?.text = content.description
             Glide.with(itemView.context)
-                .load(imageUrl)
+                .load(content.image)
                 .into(imageView)
         }
     }

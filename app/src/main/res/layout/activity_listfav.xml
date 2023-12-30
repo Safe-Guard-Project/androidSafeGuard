@@ -22,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="387dp"
+        android:layout_width="match_parent"
         android:layout_height="625dp"
         android:layout_marginTop="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,7 +32,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFavorie"
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="664dp"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="66dp" />

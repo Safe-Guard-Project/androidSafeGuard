@@ -16,15 +16,15 @@
         android:text="Votre avis"
         android:textStyle="bold"
         android:textSize="20dp"
-        android:textColor="@color/blue"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ScrollView
-        android:layout_width="358dp"
-        android:layout_height="669dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginTop="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +33,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvFeed"
-            android:layout_width="409dp"
+            android:layout_width="match_parent"
             android:layout_height="664dp"
             tools:layout_editor_absoluteX="1dp"
             tools:layout_editor_absoluteY="66dp" />

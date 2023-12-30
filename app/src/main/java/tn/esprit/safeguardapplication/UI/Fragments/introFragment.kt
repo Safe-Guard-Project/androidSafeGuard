@@ -53,6 +53,7 @@ class introFragment : Fragment() {
 
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -73,46 +74,54 @@ class introFragment : Fragment() {
             isFavFilled = !isFavFilled
         }
 
+
+    }
+
+    private fun addToFavorites() {
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val introductionList = RetrofitImpl.api.getIntro()
-                val clusterAddress = "mongodb+srv://safeG:safeG@cluster0.bzykoxx.mongodb.net/?retryWrites=true&w=majority"
-                val imageUrl = "https://$clusterAddress/" + introductionList[0].image
-
-                if (introductionList != null) {
+                if (introductionList != null && introductionList.isNotEmpty()) {
                     withContext(Dispatchers.Main) {
-                        binding.textView5.text = introductionList[0].description
-                        CoroutineScope(Dispatchers.IO).launch {
+                        val coursId = introductionList[0]._id
+                        val cours = Cours(
+                            _id = coursId,
+                            Type = Cours.type.Introduction,
+                            image = "",
+                            description = ""
+                        ) // Remplacez les valeurs par celles appropriées
+                        val favori = Favori(
+                            _id = "",
+                            idCoursProgramme = cours
+                        )
+
+                        viewModel.viewModelScope.launch(Dispatchers.IO) {
                             try {
-                                val introductionList = RetrofitImpl.api.getIntro()
+                                val response = viewModel.addFav(favori)
 
-                                if (introductionList != null) {
-                                    withContext(Dispatchers.Main) {
-
-                                        binding.textView5.text = introductionList[0].description
-                                        Glide.with(requireContext()).load(imageUrl).into(binding.imageDef)
-                                    }
+                                if (response.isSuccessful) {
+                                    Log.d("intoActivity", "Request successful")
                                 } else {
+                                    Log.e("intoActivity", "Request failed: ${response.code()}")
                                 }
                             } catch (e: Exception) {
-                                e.printStackTrace()
+                                Log.e("intoActivity", "Exception: ${e.message}")
                             }
                         }
-
                     }
-                } else {
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
-
-
     }
+}
+/*
     private fun addToFavorites() {
+
         val favori = Favori(
-            _id = "id de fav",
-            idCoursProgramme = "65590e31c34eba3a779aca70"
+            _id = "",
+            idCoursProgramme = Fa
 
         )
 
@@ -131,5 +140,8 @@ class introFragment : Fragment() {
                 Log.e("intoActivity", "Exception: ${e.message}")
             }
         }
+
+
     }
-}
+
+*/

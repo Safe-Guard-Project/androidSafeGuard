@@ -13,9 +13,6 @@ interface ProgrammeApi {
     suspend fun getProgrammes(): Response<List<Programme>>
    @GET("programme/cours")
    suspend fun getProgrammesWithCours(): Response<List<Programme>>
-
-
-
     @GET("cours/")
     suspend fun getCours(): List<Cours>
     @GET("cours/CAUSE")
