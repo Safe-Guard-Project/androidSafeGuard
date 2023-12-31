@@ -55,10 +55,7 @@ class FeedAdapter: RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
             val commentaire = commentaire[position]
             textfeedbk.text = commentaire.textComment
             buttonSupp.setOnClickListener { deleteOnceRess(holder.absoluteAdapterPosition) }
-            buttonModif.setOnClickListener {
 
-                editcomment(holder.adapterPosition)
-            }
 
         }
     }

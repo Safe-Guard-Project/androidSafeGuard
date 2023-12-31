@@ -8,7 +8,6 @@ import tn.esprit.safeguardapplication.models.Cours
 import tn.esprit.safeguardapplication.models.Programme
 
 interface ProgrammeApi {
-
     @GET("programme/cours")
     suspend fun getProgrammes(): Response<List<Programme>>
    @GET("programme/cours")

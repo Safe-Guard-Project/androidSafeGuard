@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -73,9 +74,23 @@ class introFragment : Fragment() {
 
             isFavFilled = !isFavFilled
         }
+        CoroutineScope(Dispatchers.IO).launch {
+            try {
+                val introductionList = RetrofitImpl.api.getIntro()
+                if (introductionList != null && introductionList.isNotEmpty()) {
+                    withContext(Dispatchers.Main) {
+                        binding.textView5.text = introductionList[0].description
+                        Glide.with(requireContext()).load(introductionList[0].image).into(binding.imageDef)
+                    }
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
 
 
     }
+
 
     private fun addToFavorites() {
         CoroutineScope(Dispatchers.IO).launch {
@@ -83,13 +98,16 @@ class introFragment : Fragment() {
                 val introductionList = RetrofitImpl.api.getIntro()
                 if (introductionList != null && introductionList.isNotEmpty()) {
                     withContext(Dispatchers.Main) {
+
+                        Glide.with(requireContext()).load(introductionList[0].image).into(binding.imageDef)
+
                         val coursId = introductionList[0]._id
                         val cours = Cours(
                             _id = coursId,
                             Type = Cours.type.Introduction,
                             image = "",
                             description = ""
-                        ) // Remplacez les valeurs par celles appropriées
+                        )
                         val favori = Favori(
                             _id = "",
                             idCoursProgramme = cours
@@ -116,32 +134,4 @@ class introFragment : Fragment() {
         }
     }
 }
-/*
-    private fun addToFavorites() {
 
-        val favori = Favori(
-            _id = "",
-            idCoursProgramme = Fa
-
-        )
-
-        viewModel.viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val response = viewModel.addFav(favori)
-
-
-                if (response.isSuccessful) {
-
-                    Log.d("intoActivity", "Request successful")
-                } else {
-                    Log.e("intoActivity", "Request failed: ${response.code()}")
-                }
-            } catch (e: Exception) {
-                Log.e("intoActivity", "Exception: ${e.message}")
-            }
-        }
-
-
-    }
-
-*/
