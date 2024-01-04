@@ -7,17 +7,17 @@ import androidx.room.PrimaryKey
 
 
 data class Cours (
-    val id: String,
+    val _id: String,
     val Type : type,
     val image: String,
-    val description: String,
-    val idProgramme: String
+    val description: String
 
-    )
+)
 {
     enum class type {
         Introduction,CAUSE, CONSEQUENCE, SIGNE , Agir
     }
+
 
 
 

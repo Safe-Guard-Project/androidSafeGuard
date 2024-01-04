@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.bumptech.glide.Glide
+
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,6 +54,7 @@ class introFragment : Fragment() {
 
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -72,35 +74,14 @@ class introFragment : Fragment() {
 
             isFavFilled = !isFavFilled
         }
-
         CoroutineScope(Dispatchers.IO).launch {
             try {
                 val introductionList = RetrofitImpl.api.getIntro()
-                val clusterAddress = "mongodb+srv://safeG:safeG@cluster0.bzykoxx.mongodb.net/?retryWrites=true&w=majority"
-                val imageUrl = "https://$clusterAddress/" + introductionList[0].image
-
-                if (introductionList != null) {
+                if (introductionList != null && introductionList.isNotEmpty()) {
                     withContext(Dispatchers.Main) {
                         binding.textView5.text = introductionList[0].description
-                        CoroutineScope(Dispatchers.IO).launch {
-                            try {
-                                val introductionList = RetrofitImpl.api.getIntro()
-
-                                if (introductionList != null) {
-                                    withContext(Dispatchers.Main) {
-
-                                        binding.textView5.text = introductionList[0].description
-                                        Glide.with(requireContext()).load(imageUrl).into(binding.imageDef)
-                                    }
-                                } else {
-                                }
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
-                        }
-
+                        Glide.with(requireContext()).load(introductionList[0].image).into(binding.imageDef)
                     }
-                } else {
                 }
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -109,26 +90,46 @@ class introFragment : Fragment() {
 
 
     }
+
+
     private fun addToFavorites() {
-        val favori = Favori(
-            _id = "id de fav",
-            idCoursProgramme = "65590e31c34eba3a779aca70"
-
-        )
-
-        viewModel.viewModelScope.launch(Dispatchers.IO) {
+        CoroutineScope(Dispatchers.IO).launch {
             try {
-                val response = viewModel.addFav(favori)
+                val introductionList = RetrofitImpl.api.getIntro()
+                if (introductionList != null && introductionList.isNotEmpty()) {
+                    withContext(Dispatchers.Main) {
 
+                        Glide.with(requireContext()).load(introductionList[0].image).into(binding.imageDef)
 
-                if (response.isSuccessful) {
+                        val coursId = introductionList[0]._id
+                        val cours = Cours(
+                            _id = coursId,
+                            Type = Cours.type.Introduction,
+                            image = "",
+                            description = ""
+                        )
+                        val favori = Favori(
+                            _id = "",
+                            idCoursProgramme = cours
+                        )
 
-                    Log.d("intoActivity", "Request successful")
-                } else {
-                    Log.e("intoActivity", "Request failed: ${response.code()}")
+                        viewModel.viewModelScope.launch(Dispatchers.IO) {
+                            try {
+                                val response = viewModel.addFav(favori)
+
+                                if (response.isSuccessful) {
+                                    Log.d("intoActivity", "Request successful")
+                                } else {
+                                    Log.e("intoActivity", "Request failed: ${response.code()}")
+                                }
+                            } catch (e: Exception) {
+                                Log.e("intoActivity", "Exception: ${e.message}")
+                            }
+                        }
+                    }
                 }
             } catch (e: Exception) {
-                Log.e("intoActivity", "Exception: ${e.message}")
+                e.printStackTrace()
             }
         }
     }

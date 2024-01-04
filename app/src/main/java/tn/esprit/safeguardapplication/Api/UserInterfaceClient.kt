@@ -11,7 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import tn.esprit.safeguardapplication.models.User
 
 class UserInterfaceClient {
-    private val BASE_URL = "http://192.168.1.13:9090/user/"
+   private val BASE_URL = "http://192.168.1.54:9090/user/"
 
     private val TAG: String = "CHECK_RESPONSE"
 

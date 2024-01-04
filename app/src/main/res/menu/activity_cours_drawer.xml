@@ -25,10 +25,7 @@
                 android:id="@+id/nav_agir"
 
                 android:title="@string/menu_Agir" />
-            <item
-                android:id="@+id/nav_quiz"
 
-                android:title="@string/menu_Quiz" />
         </group>
 
 

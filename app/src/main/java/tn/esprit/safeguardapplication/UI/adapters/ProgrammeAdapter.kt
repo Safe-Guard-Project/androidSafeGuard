@@ -42,10 +42,9 @@ class ProgrammeAdapter : RecyclerView.Adapter<ProgrammeAdapter.ViewHolder> (){
 
         holder.binding.apply {
             val programme = programmes[position]
-            val clusterAddress = "mongodb+srv://safeG:safeG@cluster0.bzykoxx.mongodb.net/?retryWrites=true&w=majority"
-            val imageUrl = "https://$clusterAddress/" + programme.image
+
             Glide.with(root.context)
-                .load(imageUrl).into(imageRV)
+                .load(programme.image).into(imageRV)
             titreProg.text= programme.Titre
             descprog.text= programme.descriptionProgramme
         }

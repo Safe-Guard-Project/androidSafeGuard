@@ -50,7 +50,7 @@ class CourrActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_introduction, R.id.nav_cause, R.id.nav_consequence , R.id.nav_signe , R.id.nav_agir, R.id.nav_quiz
+                R.id.nav_introduction, R.id.nav_cause, R.id.nav_consequence , R.id.nav_signe , R.id.nav_agir
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)

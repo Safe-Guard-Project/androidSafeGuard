@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".UI.Fragments.ProgrammeFragment">
-
+    tools:context=".UI.Activities.ProgrammeActivity">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -25,23 +24,21 @@
                 <TextView
                     android:id="@+id/textView4"
                     android:layout_width="397dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_height="61dp"
                     android:text="Progammes"
-                    android:textColor="@color/black"
                     android:textSize="25dp"
                     android:textStyle="bold"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginLeft="20dp"
                     tools:layout_editor_absoluteX="37dp"
                     tools:layout_editor_absoluteY="25dp" />
-
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvId"
-                    android:layout_width="match_parent"
-                    android:layout_height="680dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_width="405dp"
+                    android:layout_height="597dp"
+                    android:layout_marginStart="1dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginEnd="1dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView4" />
@@ -61,4 +58,5 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

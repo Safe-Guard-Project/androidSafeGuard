@@ -51,7 +51,7 @@ class FeedBack : AppCompatActivity() {
         }
     }
     private fun setupRecyclerView() = binding.rvFeed.apply {
-       feedAdapter = FeedAdapter()
+        feedAdapter = FeedAdapter()
 
         feedAdapter.setOnDeleteClick { position ->
 
@@ -68,21 +68,22 @@ class FeedBack : AppCompatActivity() {
                     val newList = feedAdapter.commentaire.toMutableList()
                     // Supprimer l'élément de la nouvelle liste
                     newList.removeAt(position)
-                    // Mettre à jour la liste dans l'adaptateur
+
                     feedAdapter.commentaire = newList
                 } else {
-                    // Sinon, nous enregistrons une erreur dans le journal
+
                     Log.e(TAG, "Error deleting reservationPc")
                 }
             }
         }
+        /*
         feedAdapter.setOnEditClickListener { position ->
             val commentaire = feedAdapter.commentaire[position]
             val intent=Intent(this@FeedBack,CourrActivity::class.java)
             intent.putExtra("commentaireId", commentaire._id)
             intent.putExtra("commentaireText", commentaire.textComment)
            startActivity(intent)
-        }
+        }*/
 
 
 
@@ -97,5 +98,4 @@ class FeedBack : AppCompatActivity() {
     }
 
     companion object{const val TAG = "Commentaire"}
-    }
-
+}

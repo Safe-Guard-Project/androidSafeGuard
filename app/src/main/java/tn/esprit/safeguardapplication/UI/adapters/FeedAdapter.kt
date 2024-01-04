@@ -38,10 +38,10 @@ class FeedAdapter: RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
     private val differ = AsyncListDiffer(this, diffCallback)
 
     var commentaire: MutableList<Commentaire>
-    get() = differ.currentList
-    set(value) {
-        differ.submitList(value)
-    }
+        get() = differ.currentList
+        set(value) {
+            differ.submitList(value)
+        }
 
     override fun getItemCount() = commentaire.size
 
@@ -55,10 +55,7 @@ class FeedAdapter: RecyclerView.Adapter<FeedAdapter.ViewHolder>() {
             val commentaire = commentaire[position]
             textfeedbk.text = commentaire.textComment
             buttonSupp.setOnClickListener { deleteOnceRess(holder.absoluteAdapterPosition) }
-            buttonModif.setOnClickListener {
 
-                editcomment(holder.adapterPosition)
-            }
 
         }
     }
