@@ -8,12 +8,12 @@
 
     <TextView
         android:id="@+id/txtFeed"
-        android:layout_width="107dp"
+        android:layout_width="wrap_content"
         android:layout_height="21dp"
         android:layout_marginStart="27dp"
         android:layout_marginTop="44dp"
         android:layout_marginEnd="326dp"
-        android:text="Votre avis"
+        android:text="Tous les commentaires"
         android:textStyle="bold"
         android:textSize="20dp"
         android:textColor="@color/blue"

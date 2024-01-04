@@ -1,5 +1,6 @@
 package tn.esprit.safeguardapplication.UI.Fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -15,7 +16,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import tn.esprit.safeguardapplication.Api.RetrofitImpl
+import tn.esprit.safeguardapplication.CatastropheActivity
 import tn.esprit.safeguardapplication.R
+import tn.esprit.safeguardapplication.UI.Activities.ui.FeedBack
+import tn.esprit.safeguardapplication.UI.Activities.ui.Listfav
 import tn.esprit.safeguardapplication.databinding.FragmentIntroBinding
 import tn.esprit.safeguardapplication.models.Cours
 import tn.esprit.safeguardapplication.models.Favori
@@ -49,6 +53,14 @@ class introFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentIntroBinding.inflate(inflater, container, false)
+        binding.commentid.setOnClickListener {
+            val intent = Intent(requireContext(), FeedBack::class.java)
+            startActivity(intent)
+        }
+        binding.favid.setOnClickListener {
+            val intent = Intent(requireContext(), Listfav::class.java)
+            startActivity(intent)
+        }
 
         return binding.root
 

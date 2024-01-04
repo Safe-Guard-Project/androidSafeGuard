@@ -64,7 +64,9 @@ class MainActivity : AppCompatActivity()  {
         val learningImageView = findViewById<ImageView>(R.id.nav_learning)
 
         learningImageView.setOnClickListener() {
-            supportFragmentManager.beginTransaction().replace(R.id.container , progFragment).commit()
+            //supportFragmentManager.beginTransaction().replace(R.id.container , progFragment).commit()
+            val intent = Intent(this@MainActivity, ProgrammeActivity::class.java)
+            startActivity(intent)
         }
 
 

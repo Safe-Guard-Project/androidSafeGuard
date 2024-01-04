@@ -20,8 +20,8 @@
             <fragment
                 android:id="@+id/nav_host_fragment_content_courr"
                 android:name="androidx.navigation.fragment.NavHostFragment"
-                android:layout_width="387dp"
-                android:layout_height="575dp"
+                android:layout_width="412dp"
+                android:layout_height="656dp"
                 app:defaultNavHost="true"
                 app:layout_constraintHorizontal_bias="0.333"
                 app:layout_constraintLeft_toLeftOf="parent"
